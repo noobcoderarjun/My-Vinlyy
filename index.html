@@ -1,16 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>My Vinyll</title>
 
-    <!-- Google Login -->
     <script src="https://accounts.google.com/gsi/client" async defer></script>
-
-    <!-- YouTube Player -->
     <script src="https://www.youtube.com/iframe_api"></script>
 
     <link rel="stylesheet" href="style.css">
@@ -18,166 +14,116 @@
 
 <body>
 
-    <header class="top-bar">
+<header class="top-bar">
+    <div class="logo">MY VINYLL</div>
 
-        <div class="logo">
-            MY VINYLL
+    <nav>
+        <a href="#">ABOUT</a>
+        <span>·</span>
+        <a href="#">PRIVACY</a>
+    </nav>
+</header>
+
+
+<main>
+
+    <section class="player">
+
+        <div class="song-info">
+            <h1 id="song-title">Track Name</h1>
+            <p id="artist">ARTIST NAME</p>
         </div>
 
-        <nav>
-            <a href="#">ABOUT</a>
-            <span>·</span>
-            <a href="#">PRIVACY</a>
-        </nav>
+        <div class="time" id="time">00:00</div>
 
-    </header>
+        <div class="waveform">
+            <span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span><span></span>
+        </div>
+
+        <div class="controls">
+            <button id="restart">↶</button>
+            <button id="previous">|◀</button>
+
+            <button id="play" class="play-button">
+                ▶
+            </button>
+
+            <button id="next">▶|</button>
+            <button id="shuffle">⤨</button>
+        </div>
+
+        <div class="search-container">
+            <input
+                id="search"
+                type="text"
+                placeholder="Search for any song or playlist..."
+            >
+        </div>
+
+    </section>
 
 
-    <main>
+    <section class="turntable">
 
-        <section class="player">
+        <div class="record" id="record">
 
-            <div class="song-info">
-
-                <h1 id="song-title">
-                    Track Name
-                </h1>
-
-                <p id="artist">
-                    ARTIST NAME
-                </p>
-
+            <div class="record-label">
+                <span>
+                    MY<br>
+                    VINYLL
+                </span>
             </div>
 
+            <div class="record-hole"></div>
 
-            <div class="time" id="time">
-                00:00
+        </div>
+
+        <div class="tonearm">
+            <div class="tonearm-base"></div>
+
+            <div class="arm">
+                <div class="cartridge"></div>
             </div>
+        </div>
+
+    </section>
+
+</main>
 
 
-            <div class="waveform">
+<!-- REAL YOUTUBE PLAYER -->
 
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
+<section class="youtube-section">
 
-            </div>
+    <h3>YOUTUBE PLAYER</h3>
+
+    <div id="youtube-player"></div>
+
+</section>
 
 
-            <div class="controls">
+<footer>
 
-                <button id="restart">
-                    ↶
-                </button>
+    <button
+        id="theme-toggle"
+        class="theme-button">
+        ◐
+    </button>
 
-                <button id="previous">
-                    |◀
-                </button>
+    <button
+        id="youtube-login"
+        class="login-button">
+        CONNECT YOUTUBE
+    </button>
 
-                <button id="play" class="play-button">
-                    ▶
-                </button>
-
-                <button id="next">
-                    ▶|
-                </button>
-
-                <button id="shuffle">
-                    ⤨
-                </button>
-
-            </div>
+</footer>
 
 
-            <div class="search-container">
-
-                <input
-                    id="search"
-                    type="text"
-                    placeholder="Search for any song or playlist..."
-                >
-
-            </div>
-
-        </section>
-
-
-        <section class="turntable">
-
-            <div class="record" id="record">
-
-                <div class="record-label">
-                    <span>
-                        MY<br>
-                        VINYLL
-                    </span>
-                </div>
-
-                <div class="record-hole"></div>
-
-            </div>
-
-
-            <div class="tonearm">
-
-                <div class="tonearm-base"></div>
-
-                <div class="arm">
-
-                    <div class="cartridge"></div>
-
-                </div>
-
-            </div>
-
-        </section>
-
-    </main>
-
-
-    <!-- Hidden YouTube player -->
-    <div id="youtube-player-container">
-
-        <div id="youtube-player"></div>
-
-    </div>
-
-
-    <footer>
-
-        <button
-            id="theme-toggle"
-            class="theme-button"
-        >
-            ◐
-        </button>
-
-        <button
-            id="youtube-login"
-            class="login-button"
-        >
-            CONNECT YOUTUBE
-        </button>
-
-    </footer>
-
-
-    <script src="script.js"></script>
+<script src="script.js"></script>
 
 </body>
-
 </html>

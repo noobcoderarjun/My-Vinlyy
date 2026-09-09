@@ -5,19 +5,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>My Vinyl</title>
+    <title>My Vinyll</title>
+
+    <!-- Google Identity Services -->
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
 
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-    <!-- ================= HEADER ================= -->
+    <!-- HEADER -->
 
     <header class="top-bar">
 
         <div class="logo">
-            MY VINYL
+            MY VINYLL
         </div>
 
         <nav>
@@ -29,11 +32,11 @@
     </header>
 
 
-    <!-- ================= MAIN ================= -->
+    <!-- MAIN -->
 
     <main>
 
-        <!-- ===== LEFT SIDE ===== -->
+        <!-- LEFT PLAYER -->
 
         <section class="player">
 
@@ -57,9 +60,8 @@
 
             <!-- WAVEFORM -->
 
-            <div class="waveform" id="waveform">
+            <div class="waveform">
 
-                <span></span>
                 <span></span>
                 <span></span>
                 <span></span>
@@ -88,23 +90,23 @@
 
             <div class="controls">
 
-                <button id="restart" title="Restart">
+                <button id="restart">
                     ↶
                 </button>
 
-                <button id="previous" title="Previous">
+                <button id="previous">
                     |◀
                 </button>
 
-                <button id="play" class="play-button" title="Play">
+                <button id="play" class="play-button">
                     ▶
                 </button>
 
-                <button id="next" title="Next">
+                <button id="next">
                     ▶|
                 </button>
 
-                <button id="shuffle" title="Shuffle">
+                <button id="shuffle">
                     ⤨
                 </button>
 
@@ -126,7 +128,7 @@
         </section>
 
 
-        <!-- ===== RIGHT SIDE ===== -->
+        <!-- TURNTABLE -->
 
         <section class="turntable">
 
@@ -136,7 +138,7 @@
 
                     <span>
                         MY<br>
-                        VINYL
+                        VINYLL
                     </span>
 
                 </div>
@@ -165,7 +167,7 @@
     </main>
 
 
-    <!-- ================= BOTTOM ================= -->
+    <!-- FOOTER -->
 
     <footer>
 
@@ -180,11 +182,8 @@
     </footer>
 
 
-    <!-- ================= JAVASCRIPT ================= -->
-
     <script src="script.js"></script>
 
 </body>
 
 </html>
-            

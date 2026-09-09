@@ -2,68 +2,129 @@
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>My Vinyll 🕷️</title>
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-    <script src="https://accounts.google.com/gsi/client" async defer></script>
-    <script src="https://www.youtube.com/iframe_api"></script>
+    <title>MY VINYLL — BY ARJUNN</title>
 
-    <link rel="stylesheet" href="style.css">
+
+    <!-- GOOGLE -->
+
+    <script
+        src="https://accounts.google.com/gsi/client"
+        async
+        defer
+    ></script>
+
+
+    <!-- YOUTUBE -->
+
+    <script
+        src="https://www.youtube.com/iframe_api"
+    ></script>
+
+
+    <!-- CSS -->
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
 </head>
+
 
 <body>
 
+
+    <!-- =====================================================
+         SPIDER WEB BACKGROUND
+         ===================================================== -->
+
     <div class="web web-1"></div>
+
     <div class="web web-2"></div>
 
-    <!-- HEADER -->
+    <div class="web web-3"></div>
+
+
+
+    <!-- =====================================================
+         HEADER
+         ===================================================== -->
 
     <header class="top-bar">
 
+
+        <!-- LOGO -->
+
         <div class="logo">
-            <span class="spider">🕷</span>
-            MY VINYLL
-        </div>
 
-        <div class="clock-card">
-
-            <div id="clock">
-                00:00:00
+            <div class="logo-title">
+                MY VINYLL
             </div>
 
-            <div id="date">
-                WED • SEP 09
+            <div class="logo-author">
+                BY ARJUNN
             </div>
 
         </div>
+
+
+
+        <!-- NAVIGATION -->
 
         <nav>
 
-            <a href="#">ABOUT</a>
+            <a href="#">
+                ABOUT
+            </a>
 
-            <span>•</span>
+            <span>
+                •
+            </span>
 
-            <a href="#">VINYLL</a>
+            <a href="#">
+                VINYLL
+            </a>
 
         </nav>
 
+
     </header>
 
-    <!-- MAIN -->
+
+
+    <!-- =====================================================
+         MAIN
+         ===================================================== -->
 
     <main>
 
-        <!-- PLAYER -->
+
+        <!-- =================================================
+             LEFT / PLAYER
+             ================================================= -->
 
         <section class="player-section">
 
-            <div class="song-info">
 
-                <div class="now-playing">
-                    NOW PLAYING
-                </div>
+            <!-- SMALL LABEL -->
+
+            <div class="now-playing">
+                NOW PLAYING
+            </div>
+
+
+
+            <!-- SONG TITLE -->
+
+            <div class="song-info">
 
                 <h1 id="song-title">
                     Choose a song
@@ -75,13 +136,19 @@
 
             </div>
 
-            <!-- TIMELINE -->
+
+
+            <!-- =================================================
+                 TIMELINE
+                 ================================================= -->
 
             <div class="timeline-area">
+
 
                 <span id="current-time">
                     00:00
                 </span>
+
 
                 <input
                     id="timeline"
@@ -91,81 +158,266 @@
                     value="0"
                 >
 
+
                 <span id="duration">
                     00:00
                 </span>
 
+
             </div>
 
-            <!-- CONTROLS -->
+
+
+            <!-- =================================================
+                 CONTROLS
+                 ================================================= -->
 
             <div class="controls">
 
-                <button id="restart">
+
+                <button
+                    id="restart"
+                    title="Restart"
+                >
                     ↶
                 </button>
 
-                <button id="previous">
+
+                <button
+                    id="previous"
+                    title="Previous"
+                >
                     |◀
                 </button>
+
 
                 <button
                     id="play"
                     class="play-button"
+                    title="Play / Pause"
                 >
                     ▶
                 </button>
 
-                <button id="next">
+
+                <button
+                    id="next"
+                    title="Next"
+                >
                     ▶|
                 </button>
 
-                <button id="shuffle">
+
+                <button
+                    id="shuffle"
+                    title="Shuffle"
+                >
                     ⤨
                 </button>
 
+
             </div>
 
-            <!-- SEARCH -->
+
+
+            <!-- =================================================
+                 SEARCH
+                 ================================================= -->
 
             <div class="search-box">
 
+
                 <span class="search-icon">
-                    🔎
+                    ⌕
                 </span>
+
 
                 <input
                     id="search"
                     type="text"
-                    placeholder="Search any song, artist or video..."
+                    placeholder="Search any song on YouTube..."
                     autocomplete="off"
                 >
 
-                <button id="search-button">
+
+                <button
+                    id="search-button"
+                >
                     SEARCH
                 </button>
 
+
             </div>
 
-            <!-- SEARCH RESULTS -->
+
+
+            <!-- =================================================
+                 SEARCH RESULTS
+                 ================================================= -->
 
             <div
                 id="search-results"
                 class="search-results"
             ></div>
 
+
         </section>
 
-        <!-- VINYL -->
+
+
+        <!-- =================================================
+             RIGHT / BOW + VINYL
+             ================================================= -->
 
         <section class="turntable">
+
+
+            <!-- =================================================
+                 BOW AND ARROW
+                 ================================================= -->
+
+            <div class="bow-arrow">
+
+
+                <svg
+                    viewBox="0 0 700 500"
+                    class="bow-svg"
+                    aria-label="Arjun bow and arrow"
+                >
+
+
+                    <!-- LEFT BOW -->
+
+                    <path
+                        class="bow"
+                        d="
+                        M350 85
+                        C265 75 165 95 80 180
+                        C150 160 225 175 300 225
+                        "
+                    />
+
+
+                    <!-- RIGHT BOW -->
+
+                    <path
+                        class="bow"
+                        d="
+                        M350 85
+                        C435 75 535 95 620 180
+                        C550 160 475 175 400 225
+                        "
+                    />
+
+
+                    <!-- BOW LOWER LEFT -->
+
+                    <path
+                        class="bow"
+                        d="
+                        M80 180
+                        C165 250 250 285 350 310
+                        "
+                    />
+
+
+                    <!-- BOW LOWER RIGHT -->
+
+                    <path
+                        class="bow"
+                        d="
+                        M620 180
+                        C535 250 450 285 350 310
+                        "
+                    />
+
+
+                    <!-- ARROW -->
+
+                    <line
+                        class="arrow"
+                        x1="350"
+                        y1="35"
+                        x2="350"
+                        y2="410"
+                    />
+
+
+                    <!-- ARROW HEAD -->
+
+                    <path
+                        class="arrow-head"
+                        d="
+                        M350 25
+                        L337 48
+                        L350 43
+                        L363 48
+                        Z
+                        "
+                    />
+
+
+                    <!-- ARROW FEATHERS -->
+
+                    <path
+                        class="feather"
+                        d="
+                        M350 410
+                        L330 440
+                        L350 425
+                        L370 440
+                        Z
+                        "
+                    />
+
+
+                    <path
+                        class="feather feather-left"
+                        d="
+                        M350 405
+                        C335 390 325 380 315 365
+                        "
+                    />
+
+
+                    <path
+                        class="feather feather-right"
+                        d="
+                        M350 405
+                        C365 390 375 380 385 365
+                        "
+                    />
+
+
+                    <!-- CENTER DETAIL -->
+
+                    <circle
+                        class="arrow-center"
+                        cx="350"
+                        cy="310"
+                        r="7"
+                    />
+
+
+                </svg>
+
+
+            </div>
+
+
+
+            <!-- =================================================
+                 VINYL
+                 ================================================= -->
 
             <div
                 class="record"
                 id="record"
             >
 
+
                 <div class="record-lines"></div>
+
 
                 <div class="record-label">
 
@@ -176,13 +428,23 @@
 
                 </div>
 
+
                 <div class="record-hole"></div>
+
 
             </div>
 
+
+
+            <!-- =================================================
+                 TONEARM
+                 ================================================= -->
+
             <div class="tonearm">
 
+
                 <div class="tonearm-base"></div>
+
 
                 <div class="arm">
 
@@ -190,34 +452,56 @@
 
                 </div>
 
+
             </div>
+
 
         </section>
 
+
     </main>
 
-    <!-- YOUTUBE PLAYER -->
+
+
+    <!-- =====================================================
+         YOUTUBE PLAYER
+         ===================================================== -->
 
     <section class="youtube-section">
+
 
         <div class="youtube-title">
             YOUTUBE PLAYER
         </div>
 
+
         <div id="youtube-player"></div>
+
 
     </section>
 
-    <!-- FOOTER -->
+
+
+    <!-- =====================================================
+         FOOTER
+         ===================================================== -->
 
     <footer>
+
+
+        <!-- THEME -->
 
         <button
             id="theme-toggle"
             class="theme-button"
+            title="Change theme"
         >
             ◐
         </button>
+
+
+
+        <!-- YOUTUBE LOGIN -->
 
         <button
             id="youtube-login"
@@ -226,9 +510,19 @@
             CONNECT YOUTUBE
         </button>
 
+
     </footer>
 
-    <script src="script.js"></script>
+
+
+    <!-- =====================================================
+         JAVASCRIPT
+         ===================================================== -->
+
+    <script
+        src="script.js"
+    ></script>
+
 
 </body>
 

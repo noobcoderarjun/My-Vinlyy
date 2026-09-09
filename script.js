@@ -1,49 +1,38 @@
-/* ==================================================
-   VINYL PLAYER
-================================================== */
+// ===============================
+// MY VINYL — YOUTUBE CONNECTION
+// ===============================
+
+// Put your Google OAuth Client ID here
+const CLIENT_ID = "795809069739-s7lm14e62q020dt31pup29vnk3p7l5k6.apps.googleusercontent.com";
 
 
-/* -----------------------------
-   GET HTML ELEMENTS
------------------------------ */
+// ===============================
+// ELEMENTS
+// ===============================
 
 const record = document.getElementById("record");
-
 const playButton = document.getElementById("play");
-
 const themeButton = document.getElementById("theme-toggle");
 
-const timeDisplay = document.getElementById("time");
 
-const songTitle = document.getElementById("song-title");
-
-const artist = document.getElementById("artist");
-
-
-/* -----------------------------
-   PLAY / PAUSE
------------------------------ */
+// ===============================
+// VINYL DEMO PLAY BUTTON
+// ===============================
 
 let playing = false;
 
-
-playButton.addEventListener("click", function () {
+playButton.addEventListener("click", () => {
 
     playing = !playing;
-
 
     if (playing) {
 
         record.classList.add("spinning");
-
         playButton.textContent = "Ⅱ";
-
-        timeDisplay.textContent = "00:01";
 
     } else {
 
         record.classList.remove("spinning");
-
         playButton.textContent = "▶";
 
     }
@@ -51,96 +40,48 @@ playButton.addEventListener("click", function () {
 });
 
 
-/* -----------------------------
-   RESTART
------------------------------ */
+// ===============================
+// DARK MODE
+// ===============================
 
-document
-    .getElementById("restart")
-    .addEventListener("click", function () {
-
-        timeDisplay.textContent = "00:00";
-
-    });
-
-
-/* -----------------------------
-   PREVIOUS
------------------------------ */
-
-document
-    .getElementById("previous")
-    .addEventListener("click", function () {
-
-        songTitle.textContent = "Previous Track";
-
-        artist.textContent = "ARTIST NAME";
-
-    });
-
-
-/* -----------------------------
-   NEXT
------------------------------ */
-
-document
-    .getElementById("next")
-    .addEventListener("click", function () {
-
-        songTitle.textContent = "Next Track";
-
-        artist.textContent = "ARTIST NAME";
-
-    });
-
-
-/* -----------------------------
-   SHUFFLE
------------------------------ */
-
-document
-    .getElementById("shuffle")
-    .addEventListener("click", function () {
-
-        songTitle.textContent = "Random Track";
-
-        artist.textContent = "ARTIST NAME";
-
-    });
-
-
-/* ==================================================
-   DARK MODE
-================================================== */
-
-themeButton.addEventListener("click", function () {
+themeButton.addEventListener("click", () => {
 
     document.body.classList.toggle("dark");
 
-
     if (document.body.classList.contains("dark")) {
-
         themeButton.textContent = "☀";
-
     } else {
-
         themeButton.textContent = "◐";
-
     }
 
 });
 
 
-/* ==================================================
-   YOUTUBE BUTTON
-================================================== */
+// ===============================
+// YOUTUBE LOGIN
+// ===============================
 
-document
-    .getElementById("youtube-login")
-    .addEventListener("click", function () {
+const youtubeButton =
+    document.getElementById("youtube-login");
+
+
+youtubeButton.addEventListener("click", () => {
+
+    if (
+        CLIENT_ID ===
+        "PASTE_YOUR_CLIENT_ID_HERE"
+    ) {
 
         alert(
-            "YouTube connection coming next! 🎵"
+            "Add your Google Client ID to script.js first."
         );
 
-    });
+        return;
+    }
+
+
+    alert(
+        "YouTube connection is being prepared! 🎵"
+    );
+
+});

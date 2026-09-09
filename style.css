@@ -1,7 +1,12 @@
 /* ============================================================
    MY VINYLL
-   SPIDER-MAN THEME
-   ORIGINAL ELEGANT FONT
+   BY ARJUNN
+   BOW & ARROW × SPIDER-MAN
+   ============================================================ */
+
+
+/* ============================================================
+   RESET
    ============================================================ */
 
 * {
@@ -10,144 +15,173 @@
     padding: 0;
 }
 
+
 :root {
-    --black: #05070a;
-    --blue-black: #07131f;
-    --blue: #087ea4;
-    --electric-blue: #13bfe8;
+
+    --black: #080808;
+    --white: #f7f6f2;
+
+    --paper: #f5f4ef;
+    --paper-dark: #e8e6df;
+
+    --text: #111111;
+    --muted: #777777;
+
     --red: #e21d2f;
     --bright-red: #ff3348;
-    --white: #f5f7fa;
-    --muted: #91a4b4;
+
+    --line: rgba(0, 0, 0, .14);
+
+    --shadow:
+        0 20px 60px rgba(0, 0, 0, .10);
+
 }
+
 
 /* ============================================================
    BODY
    ============================================================ */
 
 body {
+
     min-height: 100vh;
 
-    color: var(--white);
+    color: var(--text);
 
-    /*
-       ORIGINAL FIRST-DRAFT STYLE FONT
-    */
+    background:
+
+        radial-gradient(
+            circle at 50% 25%,
+            #ffffff 0%,
+            var(--paper) 55%,
+            #e9e7df 100%
+        );
+
     font-family:
         Georgia,
         "Times New Roman",
         serif;
 
-    background:
-        #05070a;
-
     overflow-x: hidden;
 
-    position: relative;
-
     transition:
-        background .3s ease,
-        color .3s ease;
+        background .45s ease,
+        color .45s ease;
+
 }
 
 
 /* ============================================================
-   SPIDER-MAN BACKGROUND
+   PAPER TEXTURE
    ============================================================ */
 
 body::before {
+
     content: "";
 
     position: fixed;
 
     inset: 0;
-
-    background:
-        linear-gradient(
-            90deg,
-            rgba(3, 5, 8, .90),
-            rgba(3, 5, 8, .52),
-            rgba(3, 5, 8, .84)
-        ),
-        url("spider-bg.jpg")
-        center center /
-        cover
-        no-repeat;
-
-    z-index: -2;
 
     pointer-events: none;
-}
 
+    z-index: 0;
 
-body::after {
-    content: "";
+    opacity: .18;
 
-    position: fixed;
+    background-image:
 
-    inset: 0;
-
-    background:
-        radial-gradient(
-            circle at center,
-            transparent 15%,
-            rgba(0,0,0,.58) 100%
+        repeating-linear-gradient(
+            90deg,
+            transparent 0,
+            transparent 3px,
+            rgba(0,0,0,.025) 4px,
+            transparent 5px
         );
 
-    z-index: -1;
-
-    pointer-events: none;
 }
 
 
 /* ============================================================
-   WEBS
+   SPIDER WEBS
    ============================================================ */
 
 .web {
+
     position: fixed;
 
     pointer-events: none;
 
-    opacity: .10;
-
     z-index: 0;
+
+    opacity: 0;
+
+    transition:
+        opacity .5s ease;
+
 }
 
 
 .web-1 {
-    width: 450px;
-    height: 450px;
 
-    top: -170px;
-    left: -170px;
+    width: 520px;
+    height: 520px;
+
+    top: -250px;
+    left: -230px;
 
     border-radius: 50%;
 
     background:
+
         repeating-radial-gradient(
             circle,
             transparent 0 35px,
-            var(--white) 36px 37px
+            rgba(255,255,255,.9) 36px 37px
         );
+
 }
 
 
 .web-2 {
-    width: 500px;
-    height: 500px;
 
-    right: -230px;
-    bottom: -250px;
+    width: 600px;
+    height: 600px;
+
+    right: -320px;
+    bottom: -300px;
 
     border-radius: 50%;
 
     background:
+
         repeating-radial-gradient(
             circle,
-            transparent 0 40px,
-            var(--white) 41px 42px
+            transparent 0 42px,
+            rgba(255,255,255,.8) 43px 44px
         );
+
+}
+
+
+.web-3 {
+
+    width: 420px;
+    height: 420px;
+
+    right: -150px;
+    top: -180px;
+
+    border-radius: 50%;
+
+    background:
+
+        repeating-radial-gradient(
+            circle,
+            transparent 0 32px,
+            rgba(255,255,255,.7) 33px 34px
+        );
+
 }
 
 
@@ -156,14 +190,15 @@ body::after {
    ============================================================ */
 
 .top-bar {
+
     position: relative;
 
-    z-index: 5;
+    z-index: 10;
 
     width: 100%;
 
     padding:
-        25px 50px;
+        30px 55px;
 
     display: flex;
 
@@ -173,126 +208,104 @@ body::after {
 
     border-bottom:
         1px solid
-        rgba(255,255,255,.10);
+        var(--line);
+
 }
 
+
+/* ============================================================
+   LOGO
+   ============================================================ */
 
 .logo {
-    font-family:
-        Georgia,
-        "Times New Roman",
-        serif;
 
-    font-size: 22px;
+    display: flex;
 
-    font-weight: 800;
+    flex-direction: column;
 
-    letter-spacing: 5px;
+    gap: 5px;
+
 }
 
 
-.spider {
+.logo-title {
+
+    font-size: 23px;
+
+    letter-spacing: 8px;
+
+    font-weight: 500;
+
+}
+
+
+.logo-author {
+
     color: var(--red);
 
-    margin-right: 8px;
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    font-size: 9px;
+
+    font-weight: 700;
+
+    letter-spacing: 4px;
+
 }
 
 
+/* ============================================================
+   NAVIGATION
+   ============================================================ */
+
 nav {
+
     display: flex;
+
+    align-items: center;
 
     gap: 18px;
 
-    align-items: center;
 }
 
 
 nav a {
+
     color: var(--muted);
 
     text-decoration: none;
 
     font-family:
-        "Courier New",
-        monospace;
+        Arial,
+        Helvetica,
+        sans-serif;
 
-    font-size: 11px;
+    font-size: 10px;
 
-    letter-spacing: 2px;
+    letter-spacing: 3px;
 
-    transition: .2s ease;
+    transition:
+        color .2s ease;
+
 }
 
 
 nav a:hover {
-    color: var(--bright-red);
+
+    color: var(--red);
+
 }
 
 
-/* ============================================================
-   DIGITAL CLOCK
-   ============================================================ */
+nav span {
 
-.clock-card {
-    position: absolute;
+    color: var(--muted);
 
-    left: 50%;
+    font-size: 10px;
 
-    transform:
-        translateX(-50%);
-
-    text-align: center;
-
-    padding:
-        8px 18px;
-
-    border:
-        1px solid
-        rgba(226,29,47,.35);
-
-    border-radius: 12px;
-
-    background:
-        rgba(0,0,0,.45);
-
-    box-shadow:
-        0 0 20px
-        rgba(226,29,47,.08);
-
-    backdrop-filter:
-        blur(8px);
-}
-
-
-#clock {
-    color:
-        var(--bright-red);
-
-    font-family:
-        "Courier New",
-        monospace;
-
-    font-size: 19px;
-
-    font-weight: bold;
-
-    letter-spacing: 3px;
-}
-
-
-#date {
-    color:
-        var(--muted);
-
-    font-family:
-        "Courier New",
-        monospace;
-
-    font-size: 8px;
-
-    letter-spacing: 2px;
-
-    margin-top: 3px;
 }
 
 
@@ -301,18 +314,16 @@ nav a:hover {
    ============================================================ */
 
 main {
+
     position: relative;
 
-    z-index: 2;
+    z-index: 3;
 
     width:
-        min(
-            1250px,
-            94%
-        );
+        min(1250px, 94%);
 
     margin:
-        60px auto;
+        45px auto 70px;
 
     display: grid;
 
@@ -322,76 +333,88 @@ main {
     gap: 70px;
 
     align-items: center;
+
 }
 
 
 /* ============================================================
-   PLAYER
+   PLAYER SECTION
    ============================================================ */
 
 .player-section {
-    padding: 30px;
 
-    min-width: 0;
+    padding:
+        20px 30px;
+
 }
 
+
+/* ============================================================
+   NOW PLAYING
+   ============================================================ */
 
 .now-playing {
-    color:
-        var(--bright-red);
+
+    color: var(--red);
 
     font-family:
-        "Courier New",
-        monospace;
+        Arial,
+        Helvetica,
+        sans-serif;
 
-    font-size: 10px;
+    font-size: 9px;
 
-    font-weight: bold;
+    font-weight: 700;
 
-    letter-spacing: 3px;
+    letter-spacing: 4px;
 
-    margin-bottom: 12px;
+    margin-bottom: 13px;
+
 }
 
 
+/* ============================================================
+   SONG INFO
+   ============================================================ */
+
 .song-info h1 {
+
     font-family:
         Georgia,
         "Times New Roman",
         serif;
 
     font-size:
-        clamp(
-            28px,
-            4vw,
-            48px
-        );
+        clamp(32px, 4vw, 52px);
 
-    font-weight: 400;
+    font-weight: 500;
 
     line-height: 1.05;
 
+    letter-spacing: -.5px;
+
     max-width: 650px;
 
-    text-shadow:
-        0 3px 25px
-        rgba(0,0,0,.65);
 }
 
 
 .song-info p {
-    margin-top: 10px;
 
-    color:
-        var(--muted);
+    margin-top: 12px;
+
+    color: var(--muted);
 
     font-family:
-        "Courier New",
-        monospace;
+        Arial,
+        Helvetica,
+        sans-serif;
 
-    font-size: 12px;
+    font-size: 11px;
 
-    letter-spacing: 2px;
+    letter-spacing: 3px;
+
+    text-transform: uppercase;
+
 }
 
 
@@ -400,6 +423,7 @@ main {
    ============================================================ */
 
 .timeline-area {
+
     display: grid;
 
     grid-template-columns:
@@ -409,77 +433,94 @@ main {
 
     gap: 12px;
 
-    margin-top: 35px;
+    margin-top: 38px;
+
 }
 
 
 .timeline-area span {
+
     font-family:
         "Courier New",
         monospace;
 
-    font-size: 11px;
+    font-size: 10px;
 
-    color:
-        var(--muted);
+    color: var(--muted);
+
 }
 
 
 #timeline {
+
     width: 100%;
 
-    height: 5px;
+    height: 4px;
 
     appearance: none;
 
+    border: none;
+
+    border-radius: 20px;
+
     background:
+
         linear-gradient(
             to right,
             var(--red) 0%,
             var(--red) 0%,
-            #24313a 0%,
-            #24313a 100%
+            #d5d5d5 0%,
+            #d5d5d5 100%
         );
 
-    border-radius: 10px;
-
     cursor: pointer;
+
 }
 
 
+/* Chrome */
+
 #timeline::-webkit-slider-thumb {
+
     appearance: none;
 
-    width: 15px;
-    height: 15px;
+    width: 14px;
+
+    height: 14px;
 
     border-radius: 50%;
 
     background:
-        var(--bright-red);
+        var(--red);
 
     border:
         2px solid
         white;
 
     box-shadow:
-        0 0 12px
-        rgba(255,51,72,.7);
+        0 2px 8px
+        rgba(0,0,0,.2);
+
 }
 
 
+/* Firefox */
+
 #timeline::-moz-range-thumb {
-    width: 15px;
-    height: 15px;
+
+    width: 14px;
+
+    height: 14px;
 
     border-radius: 50%;
 
     background:
-        var(--bright-red);
+        var(--red);
 
     border:
         2px solid
         white;
+
 }
 
 
@@ -488,77 +529,100 @@ main {
    ============================================================ */
 
 .controls {
+
     display: flex;
 
     align-items: center;
 
-    gap: 22px;
+    gap: 18px;
 
-    margin-top: 28px;
+    margin-top: 27px;
+
 }
 
 
 .controls button {
-    width: 40px;
-    height: 40px;
+
+    width: 42px;
+
+    height: 42px;
 
     border:
         1px solid
-        rgba(255,255,255,.08);
+        rgba(0,0,0,.08);
 
     border-radius: 50%;
 
-    color:
-        var(--white);
+    color: var(--text);
 
     background:
-        rgba(0,0,0,.35);
+        rgba(255,255,255,.65);
 
     cursor: pointer;
 
     font-family:
-        "Courier New",
-        monospace;
+        Arial,
+        Helvetica,
+        sans-serif;
 
     transition:
-        .2s ease;
+        .25s ease;
+
+    box-shadow:
+        0 5px 15px
+        rgba(0,0,0,.04);
+
 }
 
 
 .controls button:hover {
+
+    color: white;
+
     background:
         var(--red);
 
     border-color:
         var(--red);
 
-    box-shadow:
-        0 0 20px
-        rgba(226,29,47,.45);
-
     transform:
-        translateY(-2px);
+        translateY(-3px);
+
+    box-shadow:
+        0 8px 20px
+        rgba(226,29,47,.25);
+
 }
 
 
 .controls .play-button {
-    width: 62px;
-    height: 62px;
+
+    width: 64px;
+
+    height: 64px;
+
+    color: white;
 
     background:
         var(--red);
 
+    border:
+        none;
+
     font-size: 19px;
 
     box-shadow:
-        0 0 25px
-        rgba(226,29,47,.35);
+        0 10px 30px
+        rgba(226,29,47,.25);
+
 }
 
 
 .controls .play-button:hover {
+
     background:
         var(--bright-red);
+
 }
 
 
@@ -567,7 +631,8 @@ main {
    ============================================================ */
 
 .search-box {
-    margin-top: 35px;
+
+    margin-top: 36px;
 
     display: flex;
 
@@ -577,83 +642,91 @@ main {
 
     border:
         1px solid
-        rgba(19,191,232,.35);
+        rgba(0,0,0,.16);
 
-    border-radius: 30px;
+    border-radius: 14px;
 
     background:
-        rgba(0,0,0,.42);
-
-    box-shadow:
-        0 0 25px
-        rgba(19,191,232,.08);
-
-    backdrop-filter:
-        blur(10px);
+        rgba(255,255,255,.65);
 
     transition:
-        border-color .2s ease,
-        box-shadow .2s ease;
+        .25s ease;
+
 }
 
 
 .search-box:focus-within {
+
     border-color:
-        rgba(19,191,232,.75);
+        var(--red);
 
     box-shadow:
-        0 0 25px
-        rgba(19,191,232,.15);
+        0 0 0 3px
+        rgba(226,29,47,.06);
+
 }
 
 
 .search-icon {
+
     margin-left: 13px;
 
-    font-size: 16px;
+    color:
+        var(--red);
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    font-size: 23px;
+
 }
 
 
 #search {
+
     flex: 1;
 
     min-width: 0;
 
     padding:
-        14px 12px;
+        13px 12px;
 
     border: none;
 
     outline: none;
 
-    background:
-        transparent;
+    background: transparent;
 
-    color:
-        white;
+    color: var(--text);
 
     font-family:
-        Georgia,
-        "Times New Roman",
-        serif;
+        Arial,
+        Helvetica,
+        sans-serif;
 
-    font-size: 14px;
+    font-size: 13px;
+
 }
 
 
 #search::placeholder {
+
     color:
-        #7c8b95;
+        #999;
+
 }
 
 
 #search-button {
+
     border: none;
 
-    border-radius: 22px;
+    border-radius: 10px;
 
     padding:
-        12px 18px;
+        12px 19px;
 
     background:
         var(--red);
@@ -661,36 +734,39 @@ main {
     color: white;
 
     font-family:
-        "Courier New",
-        monospace;
+        Arial,
+        Helvetica,
+        sans-serif;
 
     font-weight: bold;
 
-    font-size: 10px;
+    font-size: 9px;
 
-    letter-spacing: 1px;
+    letter-spacing: 2px;
 
     cursor: pointer;
 
-    transition: .2s ease;
+    transition:
+        .2s ease;
+
 }
 
 
 #search-button:hover {
+
     background:
         var(--bright-red);
 
-    box-shadow:
-        0 0 15px
-        rgba(255,51,72,.35);
 }
 
 
 #search-button:disabled {
+
     opacity: .6;
 
     cursor:
         wait;
+
 }
 
 
@@ -699,25 +775,22 @@ main {
    ============================================================ */
 
 .search-results {
+
     display: none;
 
-    margin-top: 15px;
+    margin-top: 14px;
 
-    max-height: 360px;
+    max-height: 350px;
 
     overflow-y: auto;
 
-    border-radius: 12px;
+    padding-right: 3px;
 
-    scrollbar-width: thin;
-
-    scrollbar-color:
-        var(--red)
-        transparent;
 }
 
 
 .search-result {
+
     display: flex;
 
     gap: 14px;
@@ -728,42 +801,37 @@ main {
 
     border:
         1px solid
-        rgba(255,255,255,.05);
+        rgba(0,0,0,.07);
 
-    border-radius: 10px;
+    border-radius: 11px;
 
     background:
-        rgba(0,0,0,.45);
-
-    backdrop-filter:
-        blur(8px);
+        rgba(255,255,255,.65);
 
     cursor: pointer;
 
     transition:
         .2s ease;
+
 }
 
 
 .search-result:hover {
+
     background:
-        rgba(226,29,47,.15);
+        rgba(226,29,47,.07);
 
     border-color:
-        rgba(226,29,47,.35);
+        rgba(226,29,47,.25);
 
     transform:
         translateX(3px);
-}
 
-
-.search-result:active {
-    transform:
-        scale(.99);
 }
 
 
 .search-result img {
+
     width: 100px;
 
     height: 56px;
@@ -772,57 +840,167 @@ main {
 
     border-radius: 7px;
 
-    flex-shrink: 0;
 }
 
 
 .result-text {
+
     min-width: 0;
 
-    align-self: center;
+    padding-top: 2px;
+
 }
 
 
 .result-title {
+
     font-family:
-        Georgia,
-        "Times New Roman",
-        serif;
+        Arial,
+        Helvetica,
+        sans-serif;
 
-    font-size: 14px;
+    font-size: 13px;
 
-    font-weight: bold;
+    font-weight: 600;
 
     white-space: nowrap;
 
     overflow: hidden;
 
     text-overflow: ellipsis;
+
 }
 
 
 .result-channel {
+
     color:
         var(--muted);
 
     font-family:
-        "Courier New",
-        monospace;
+        Arial,
+        Helvetica,
+        sans-serif;
 
-    font-size: 9px;
+    font-size: 10px;
 
-    margin-top: 5px;
+    margin-top: 6px;
 
-    letter-spacing: 1px;
 }
 
 
 /* ============================================================
-   VINYL
+   BOW & ARROW
+   ============================================================ */
+
+.bow-arrow {
+
+    position: absolute;
+
+    width:
+        min(560px, 45vw);
+
+    height: 390px;
+
+    top: -175px;
+
+    left: 50%;
+
+    transform:
+        translateX(-50%);
+
+    z-index: 0;
+
+    pointer-events: none;
+
+}
+
+
+.bow-svg {
+
+    width: 100%;
+
+    height: 100%;
+
+    overflow: visible;
+
+}
+
+
+.bow {
+
+    fill: none;
+
+    stroke:
+        #171717;
+
+    stroke-width: 3;
+
+    stroke-linecap: round;
+
+    stroke-linejoin: round;
+
+}
+
+
+.arrow {
+
+    stroke:
+        #171717;
+
+    stroke-width: 2;
+
+}
+
+
+.arrow-head {
+
+    fill:
+        #171717;
+
+}
+
+
+.feather {
+
+    fill:
+        none;
+
+    stroke:
+        #171717;
+
+    stroke-width: 2.5;
+
+    stroke-linecap: round;
+
+}
+
+
+.feather-left,
+.feather-right {
+
+    fill: none;
+
+}
+
+
+.arrow-center {
+
+    fill:
+        var(--red);
+
+}
+
+
+/* ============================================================
+   TURN TABLE
    ============================================================ */
 
 .turntable {
+
     position: relative;
+
+    min-height: 500px;
 
     display: flex;
 
@@ -830,22 +1008,20 @@ main {
 
     align-items: center;
 
-    min-width: 0;
 }
 
 
+/* ============================================================
+   VINYL
+   ============================================================ */
+
 .record {
+
     width:
-        min(
-            420px,
-            38vw
-        );
+        min(390px, 34vw);
 
     height:
-        min(
-            420px,
-            38vw
-        );
+        min(390px, 34vw);
 
     min-width: 280px;
 
@@ -855,27 +1031,33 @@ main {
 
     position: relative;
 
+    z-index: 2;
+
     background:
+
         radial-gradient(
             circle,
-            #101317 0 5%,
-            #090b0e 6% 14%,
-            #11151a 15% 16%,
-            #07090c 17% 25%,
-            #12161b 26% 27%,
-            #06080b 28% 100%
+            #252525 0 4%,
+            #111 5% 12%,
+            #242424 13% 14%,
+            #080808 15% 23%,
+            #202020 24% 25%,
+            #080808 26% 100%
         );
 
     box-shadow:
-        0 30px 80px
-        rgba(0,0,0,.7),
+
+        0 30px 70px
+        rgba(0,0,0,.25),
 
         inset 0 0 50px
         rgba(0,0,0,.8);
+
 }
 
 
 .record::after {
+
     content: "";
 
     position: absolute;
@@ -886,21 +1068,25 @@ main {
 
     border:
         1px solid
-        rgba(255,255,255,.07);
+        rgba(255,255,255,.08);
+
 }
 
 
 .record-label {
+
     position: absolute;
 
     width: 105px;
+
     height: 105px;
 
     left: 50%;
+
     top: 50%;
 
     transform:
-        translate(-50%,-50%);
+        translate(-50%, -50%);
 
     border-radius: 50%;
 
@@ -913,56 +1099,70 @@ main {
     text-align: center;
 
     background:
+
         radial-gradient(
             circle,
-            var(--blue) 0 30%,
+            #f4f2eb 0 30%,
             var(--red) 31% 75%,
-            #770e1a 76% 100%
+            #8d111c 76% 100%
         );
 
     box-shadow:
         0 0 25px
-        rgba(226,29,47,.3);
+        rgba(226,29,47,.25);
+
 }
 
 
 .record-label span {
-    font-family:
-        "Courier New",
-        monospace;
 
-    font-size: 11px;
+    color:
+        #111;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 10px;
 
     font-weight: 900;
 
     letter-spacing: 2px;
+
 }
 
 
 .record-hole {
+
     position: absolute;
 
     width: 12px;
+
     height: 12px;
 
     left: 50%;
+
     top: 50%;
 
     transform:
-        translate(-50%,-50%);
+        translate(-50%, -50%);
 
     border-radius: 50%;
 
     background:
-        #05070a;
+        #050505;
 
     z-index: 3;
+
 }
 
 
 .spinning {
+
     animation:
         spin 3s linear infinite;
+
 }
 
 
@@ -986,74 +1186,90 @@ main {
    ============================================================ */
 
 .tonearm {
+
     position: absolute;
 
     width: 170px;
 
     height: 220px;
 
-    right: -20px;
+    right: -15px;
 
-    top: -60px;
+    top: 25px;
 
     transform:
         rotate(12deg);
+
+    z-index: 4;
+
 }
 
 
 .tonearm-base {
+
     position: absolute;
 
     width: 65px;
+
     height: 65px;
 
     right: 0;
+
     top: 0;
 
     border-radius: 50%;
 
     background:
-        #101820;
+        #202020;
 
     border:
         2px solid
-        #303b43;
+        #444;
+
 }
 
 
 .arm {
+
     position: absolute;
 
     width: 135px;
-    height: 10px;
+
+    height: 9px;
 
     top: 45px;
+
     right: 35px;
 
     border-radius: 10px;
 
     background:
-        #9aa5ac;
+        #aaa;
 
     transform:
         rotate(35deg);
 
     transform-origin:
         right center;
+
 }
 
 
 .cartridge {
+
     position: absolute;
 
     left: -12px;
+
     bottom: -7px;
 
     width: 24px;
+
     height: 18px;
 
     background:
         var(--red);
+
 }
 
 
@@ -1062,55 +1278,63 @@ main {
    ============================================================ */
 
 .youtube-section {
+
     position: relative;
 
-    z-index: 3;
+    z-index: 5;
 
     width:
-        min(
-            650px,
-            90%
-        );
+        min(650px, 90%);
 
     margin:
-        0 auto 40px;
+        0 auto 45px;
+
 }
 
 
 .youtube-title {
+
     color:
         var(--muted);
 
     font-family:
-        "Courier New",
-        monospace;
+        Arial,
+        Helvetica,
+        sans-serif;
 
     font-size: 9px;
 
-    letter-spacing: 3px;
+    letter-spacing: 4px;
 
-    margin-bottom: 10px;
+    margin-bottom: 11px;
+
 }
 
 
 #youtube-player {
+
     width: 100%;
 
     aspect-ratio:
         16 / 9;
+
 }
 
 
 #youtube-player iframe {
-    width:
-        100% !important;
 
-    height:
-        100% !important;
+    width: 100% !important;
+
+    height: 100% !important;
 
     border: none;
 
     border-radius: 14px;
+
+    box-shadow:
+        0 20px 50px
+        rgba(0,0,0,.15);
+
 }
 
 
@@ -1119,66 +1343,540 @@ main {
    ============================================================ */
 
 footer {
+
     position: relative;
 
-    z-index: 5;
+    z-index: 10;
 
     display: flex;
 
     justify-content: center;
 
+    align-items: center;
+
     gap: 15px;
 
     padding:
-        20px 30px 35px;
+        20px 30px 40px;
+
 }
 
 
 .theme-button,
 .login-button {
+
     border:
         1px solid
-        rgba(255,255,255,.12);
+        rgba(0,0,0,.12);
 
     background:
-        rgba(0,0,0,.40);
+        rgba(255,255,255,.65);
 
     color:
-        white;
-
-    font-family:
-        "Courier New",
-        monospace;
+        var(--text);
 
     padding:
-        11px 17px;
+        11px 18px;
 
     border-radius: 10px;
 
     cursor: pointer;
 
-    backdrop-filter:
-        blur(8px);
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
 
-    transition: .2s ease;
+    font-size: 9px;
+
+    letter-spacing: 2px;
+
+    transition:
+        .25s ease;
+
 }
 
 
 .theme-button:hover,
 .login-button:hover {
+
+    color: white;
+
     background:
         var(--red);
 
     border-color:
         var(--red);
+
 }
 
 
 .login-button:disabled {
-    opacity: .75;
+
+    opacity: .7;
 
     cursor:
         default;
+
+}
+
+
+/* ============================================================
+   ============================================================
+   DARK MODE — SPIDER-MAN
+   ============================================================
+   ============================================================ */
+
+body.dark {
+
+    --text:
+        #f4f4f4;
+
+    --muted:
+        #89929b;
+
+    --line:
+        rgba(255,255,255,.10);
+
+    background:
+
+        radial-gradient(
+            circle at 50% 35%,
+            #171c22 0%,
+            #080b0f 45%,
+            #020304 100%
+        );
+
+    color:
+        #f4f4f4;
+
+}
+
+
+/* ============================================================
+   DARK PAPER TEXTURE
+   ============================================================ */
+
+body.dark::before {
+
+    opacity: .10;
+
+    background-image:
+
+        repeating-linear-gradient(
+            90deg,
+            transparent 0,
+            transparent 3px,
+            rgba(255,255,255,.03) 4px,
+            transparent 5px
+        );
+
+}
+
+
+/* ============================================================
+   DARK WEBS
+   ============================================================ */
+
+body.dark .web {
+
+    opacity: .16;
+
+}
+
+
+body.dark .web-1 {
+
+    background:
+
+        repeating-radial-gradient(
+            circle,
+            transparent 0 35px,
+            rgba(255,255,255,.8) 36px 37px
+        );
+
+}
+
+
+body.dark .web-2 {
+
+    background:
+
+        repeating-radial-gradient(
+            circle,
+            transparent 0 42px,
+            rgba(255,255,255,.7) 43px 44px
+        );
+
+}
+
+
+body.dark .web-3 {
+
+    background:
+
+        repeating-radial-gradient(
+            circle,
+            transparent 0 32px,
+            rgba(226,29,47,.8) 33px 34px
+        );
+
+}
+
+
+/* ============================================================
+   DARK HEADER
+   ============================================================ */
+
+body.dark .top-bar {
+
+    border-bottom:
+        1px solid
+        rgba(255,255,255,.08);
+
+}
+
+
+body.dark .logo-title {
+
+    color:
+        #f5f5f5;
+
+}
+
+
+body.dark nav a {
+
+    color:
+        #858d95;
+
+}
+
+
+body.dark nav a:hover {
+
+    color:
+        var(--bright-red);
+
+}
+
+
+/* ============================================================
+   DARK BOW
+   ============================================================ */
+
+body.dark .bow {
+
+    stroke:
+        #f4f4f4;
+
+    filter:
+        drop-shadow(
+            0 0 4px
+            rgba(255,255,255,.15)
+        );
+
+}
+
+
+body.dark .arrow {
+
+    stroke:
+        #f4f4f4;
+
+}
+
+
+body.dark .arrow-head {
+
+    fill:
+        #f4f4f4;
+
+}
+
+
+body.dark .feather {
+
+    stroke:
+        #f4f4f4;
+
+}
+
+
+body.dark .arrow-center {
+
+    fill:
+        var(--bright-red);
+
+}
+
+
+/* ============================================================
+   DARK PLAYER
+   ============================================================ */
+
+body.dark .song-info h1 {
+
+    color:
+        #f5f5f5;
+
+}
+
+
+body.dark .song-info p {
+
+    color:
+        #818b94;
+
+}
+
+
+/* ============================================================
+   DARK TIMELINE
+   ============================================================ */
+
+body.dark #timeline {
+
+    background:
+
+        linear-gradient(
+            to right,
+            var(--bright-red) 0%,
+            var(--bright-red) 0%,
+            #26313a 0%,
+            #26313a 100%
+        );
+
+}
+
+
+body.dark #timeline::-webkit-slider-thumb {
+
+    border-color:
+        #080b0f;
+
+}
+
+
+/* ============================================================
+   DARK CONTROLS
+   ============================================================ */
+
+body.dark .controls button {
+
+    color:
+        #eeeeee;
+
+    background:
+        rgba(255,255,255,.04);
+
+    border-color:
+        rgba(255,255,255,.10);
+
+}
+
+
+body.dark .controls button:hover {
+
+    color:
+        white;
+
+    background:
+        var(--red);
+
+    border-color:
+        var(--red);
+
+}
+
+
+body.dark .controls .play-button {
+
+    color:
+        white;
+
+    background:
+        var(--red);
+
+}
+
+
+/* ============================================================
+   DARK SEARCH
+   ============================================================ */
+
+body.dark .search-box {
+
+    background:
+        rgba(0,0,0,.35);
+
+    border-color:
+        rgba(255,255,255,.15);
+
+    box-shadow:
+        0 0 30px
+        rgba(226,29,47,.04);
+
+}
+
+
+body.dark .search-box:focus-within {
+
+    border-color:
+        var(--bright-red);
+
+    box-shadow:
+        0 0 0 3px
+        rgba(226,29,47,.08);
+
+}
+
+
+body.dark #search {
+
+    color:
+        white;
+
+}
+
+
+body.dark #search::placeholder {
+
+    color:
+        #65707a;
+
+}
+
+
+/* ============================================================
+   DARK SEARCH RESULTS
+   ============================================================ */
+
+body.dark .search-result {
+
+    background:
+        rgba(255,255,255,.035);
+
+    border-color:
+        rgba(255,255,255,.07);
+
+}
+
+
+body.dark .search-result:hover {
+
+    background:
+        rgba(226,29,47,.12);
+
+    border-color:
+        rgba(226,29,47,.3);
+
+}
+
+
+body.dark .result-title {
+
+    color:
+        #eeeeee;
+
+}
+
+
+/* ============================================================
+   DARK VINYL
+   ============================================================ */
+
+body.dark .record {
+
+    box-shadow:
+
+        0 30px 80px
+        rgba(0,0,0,.75),
+
+        0 0 40px
+        rgba(226,29,47,.04),
+
+        inset 0 0 50px
+        rgba(0,0,0,.8);
+
+}
+
+
+/* ============================================================
+   DARK TONEARM
+   ============================================================ */
+
+body.dark .tonearm-base {
+
+    background:
+        #101820;
+
+    border-color:
+        #303b43;
+
+}
+
+
+body.dark .arm {
+
+    background:
+        #858f96;
+
+}
+
+
+/* ============================================================
+   DARK YOUTUBE
+   ============================================================ */
+
+body.dark .youtube-title {
+
+    color:
+        #717b84;
+
+}
+
+
+body.dark #youtube-player iframe {
+
+    box-shadow:
+        0 20px 60px
+        rgba(0,0,0,.6);
+
+}
+
+
+/* ============================================================
+   DARK FOOTER
+   ============================================================ */
+
+body.dark .theme-button,
+body.dark .login-button {
+
+    color:
+        #eeeeee;
+
+    background:
+        rgba(255,255,255,.035);
+
+    border-color:
+        rgba(255,255,255,.12);
+
+}
+
+
+body.dark .theme-button:hover,
+body.dark .login-button:hover {
+
+    color:
+        white;
+
+    background:
+        var(--red);
+
+    border-color:
+        var(--red);
+
 }
 
 
@@ -1189,110 +1887,248 @@ footer {
 @media (max-width: 900px) {
 
     .top-bar {
+
         padding:
-            20px;
+            22px 25px;
+
     }
 
 
     nav {
+
         display: none;
-    }
 
-
-    .clock-card {
-        position: static;
-
-        transform: none;
     }
 
 
     main {
+
         grid-template-columns:
             1fr;
 
-        gap: 20px;
+        gap: 10px;
 
         margin-top: 30px;
+
     }
 
 
     .player-section {
+
         order: 2;
+
+        padding:
+            20px 10px;
+
     }
 
 
     .turntable {
+
         order: 1;
+
+        min-height: 430px;
+
     }
 
 
     .record {
+
         width: 300px;
 
         height: 300px;
+
     }
 
 
     .tonearm {
+
         display: none;
+
+    }
+
+
+    .bow-arrow {
+
+        width: 480px;
+
+        height: 330px;
+
+        top: -110px;
+
     }
 
 }
 
 
 /* ============================================================
-   SMALL MOBILE
+   MOBILE
    ============================================================ */
 
 @media (max-width: 550px) {
 
-    .logo {
-        font-size: 16px;
+    .top-bar {
 
-        letter-spacing: 2px;
-    }
-
-
-    .clock-card {
         padding:
-            6px 10px;
+            20px;
+
     }
 
 
-    #clock {
-        font-size: 13px;
+    .logo-title {
+
+        font-size: 17px;
+
+        letter-spacing: 5px;
+
     }
 
 
-    .search-box {
-        flex-wrap: wrap;
+    .logo-author {
 
-        border-radius: 14px;
+        font-size: 7px;
+
+        letter-spacing: 3px;
+
     }
 
 
-    #search {
-        min-width: 150px;
+    main {
+
+        width:
+            92%;
+
+        margin-top:
+            15px;
+
     }
 
 
-    #search-button {
-        width: 100%;
+    .turntable {
 
-        margin-top: 3px;
+        min-height:
+            350px;
 
-        border-radius: 10px;
+    }
+
+
+    .record {
+
+        width:
+            270px;
+
+        height:
+            270px;
+
+        min-width:
+            270px;
+
+        min-height:
+            270px;
+
+    }
+
+
+    .bow-arrow {
+
+        width:
+            390px;
+
+        height:
+            280px;
+
+        top:
+            -80px;
+
+    }
+
+
+    .song-info h1 {
+
+        font-size:
+            32px;
+
     }
 
 
     .timeline-area {
+
         grid-template-columns:
             40px 1fr 40px;
+
+        gap:
+            8px;
+
     }
 
 
     .controls {
-        gap: 12px;
+
+        gap:
+            10px;
+
+    }
+
+
+    .controls button {
+
+        width:
+            38px;
+
+        height:
+            38px;
+
+    }
+
+
+    .controls .play-button {
+
+        width:
+            58px;
+
+        height:
+            58px;
+
+    }
+
+
+    .search-box {
+
+        flex-wrap:
+            wrap;
+
+    }
+
+
+    #search-button {
+
+        width:
+            100%;
+
+        margin-top:
+            3px;
+
+    }
+
+
+    .youtube-section {
+
+        width:
+            92%;
+
+    }
+
+
+    footer {
+
+        flex-wrap:
+            wrap;
+
     }
 
 }
+
+
+/* ============================================================
+   END
+   ============================================================ */

@@ -7,15 +7,16 @@
 
     <title>My Vinyll</title>
 
-    <!-- Google Identity Services -->
+    <!-- Google Login -->
     <script src="https://accounts.google.com/gsi/client" async defer></script>
+
+    <!-- YouTube Player -->
+    <script src="https://www.youtube.com/iframe_api"></script>
 
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-
-    <!-- HEADER -->
 
     <header class="top-bar">
 
@@ -32,11 +33,7 @@
     </header>
 
 
-    <!-- MAIN -->
-
     <main>
-
-        <!-- LEFT PLAYER -->
 
         <section class="player">
 
@@ -58,13 +55,8 @@
             </div>
 
 
-            <!-- WAVEFORM -->
-
             <div class="waveform">
 
-                <span></span>
-                <span></span>
-                <span></span>
                 <span></span>
                 <span></span>
                 <span></span>
@@ -85,8 +77,6 @@
 
             </div>
 
-
-            <!-- CONTROLS -->
 
             <div class="controls">
 
@@ -113,8 +103,6 @@
             </div>
 
 
-            <!-- SEARCH -->
-
             <div class="search-container">
 
                 <input
@@ -128,27 +116,21 @@
         </section>
 
 
-        <!-- TURNTABLE -->
-
         <section class="turntable">
 
             <div class="record" id="record">
 
                 <div class="record-label">
-
                     <span>
                         MY<br>
                         VINYLL
                     </span>
-
                 </div>
 
                 <div class="record-hole"></div>
 
             </div>
 
-
-            <!-- TONEARM -->
 
             <div class="tonearm">
 
@@ -167,15 +149,27 @@
     </main>
 
 
-    <!-- FOOTER -->
+    <!-- Hidden YouTube player -->
+    <div id="youtube-player-container">
+
+        <div id="youtube-player"></div>
+
+    </div>
+
 
     <footer>
 
-        <button id="theme-toggle" class="theme-button">
+        <button
+            id="theme-toggle"
+            class="theme-button"
+        >
             ◐
         </button>
 
-        <button id="youtube-login" class="login-button">
+        <button
+            id="youtube-login"
+            class="login-button"
+        >
             CONNECT YOUTUBE
         </button>
 

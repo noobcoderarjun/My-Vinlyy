@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>My Vinyl</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- ================= HEADER ================= -->
+
+    <header class="top-bar">
+
+        <div class="logo">
+            MY VINYL
+        </div>
+
+        <nav>
+            <a href="#">ABOUT</a>
+            <span>·</span>
+            <a href="#">PRIVACY</a>
+        </nav>
+
+    </header>
+
+
+    <!-- ================= MAIN ================= -->
+
+    <main>
+
+        <!-- ===== LEFT SIDE ===== -->
+
+        <section class="player">
+
+            <div class="song-info">
+
+                <h1 id="song-title">
+                    Track Name
+                </h1>
+
+                <p id="artist">
+                    ARTIST NAME
+                </p>
+
+            </div>
+
+
+            <div class="time" id="time">
+                00:00
+            </div>
+
+
+            <!-- WAVEFORM -->
+
+            <div class="waveform" id="waveform">
+
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+
+            </div>
+
+
+            <!-- CONTROLS -->
+
+            <div class="controls">
+
+                <button id="restart" title="Restart">
+                    ↶
+                </button>
+
+                <button id="previous" title="Previous">
+                    |◀
+                </button>
+
+                <button id="play" class="play-button" title="Play">
+                    ▶
+                </button>
+
+                <button id="next" title="Next">
+                    ▶|
+                </button>
+
+                <button id="shuffle" title="Shuffle">
+                    ⤨
+                </button>
+
+            </div>
+
+
+            <!-- SEARCH -->
+
+            <div class="search-container">
+
+                <input
+                    id="search"
+                    type="text"
+                    placeholder="Search for any song or playlist..."
+                >
+
+            </div>
+
+        </section>
+
+
+        <!-- ===== RIGHT SIDE ===== -->
+
+        <section class="turntable">
+
+            <div class="record" id="record">
+
+                <div class="record-label">
+
+                    <span>
+                        MY<br>
+                        VINYL
+                    </span>
+
+                </div>
+
+                <div class="record-hole"></div>
+
+            </div>
+
+
+            <!-- TONEARM -->
+
+            <div class="tonearm">
+
+                <div class="tonearm-base"></div>
+
+                <div class="arm">
+
+                    <div class="cartridge"></div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- ================= BOTTOM ================= -->
+
+    <footer>
+
+        <button id="theme-toggle" class="theme-button">
+            ◐
+        </button>
+
+        <button id="youtube-login" class="login-button">
+            CONNECT YOUTUBE
+        </button>
+
+    </footer>
+
+
+    <!-- ================= JAVASCRIPT ================= -->
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
+            

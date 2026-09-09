@@ -1,6 +1,6 @@
 // ============================================================
 // MY VINYLL
-// SPIDER THEME + YOUTUBE SEARCH + TIMELINE + NEW DELHI CLOCK
+// SPIDER THEME + YOUTUBE SEARCH + TIMELINE + DARK MODE
 // ============================================================
 
 
@@ -13,7 +13,7 @@ const CLIENT_ID =
 
 
 // ============================================================
-// YOUTUBE
+// YOUTUBE API
 // ============================================================
 
 const YOUTUBE_API =
@@ -69,12 +69,6 @@ const songTitle =
 const artist =
     document.getElementById("artist");
 
-const clock =
-    document.getElementById("clock");
-
-const date =
-    document.getElementById("date");
-
 const youtubeButton =
     document.getElementById("youtube-login");
 
@@ -104,123 +98,63 @@ let isSeeking = false;
 
 
 // ============================================================
-// DIGITAL CLOCK — NEW DELHI / IST
-// ============================================================
-
-function updateClock() {
-
-    const now = new Date();
-
-    const timeFormatter =
-        new Intl.DateTimeFormat(
-            "en-IN",
-            {
-                timeZone: "Asia/Kolkata",
-                hour: "2-digit",
-                minute: "2-digit",
-                second: "2-digit",
-                hour12: false
-            }
-        );
-
-    const dateFormatter =
-        new Intl.DateTimeFormat(
-            "en-IN",
-            {
-                timeZone: "Asia/Kolkata",
-                weekday: "short",
-                month: "short",
-                day: "2-digit"
-            }
-        );
-
-
-    clock.textContent =
-        timeFormatter.format(now);
-
-
-    date.textContent =
-        dateFormatter
-            .format(now)
-            .toUpperCase()
-            .replace(",", " •");
-
-}
-
-
-// Update immediately
-updateClock();
-
-
-// Update every second
-setInterval(
-    updateClock,
-    1000
-);
-
-
-// ============================================================
 // YOUTUBE IFRAME API
 // ============================================================
 
-window.onYouTubeIframeAPIReady =
-    function () {
+window.onYouTubeIframeAPIReady = function () {
 
-        player =
-            new YT.Player(
-                "youtube-player",
-                {
+    player = new YT.Player(
+        "youtube-player",
+        {
 
-                    width: "650",
+            width: "650",
 
-                    height: "365",
+            height: "365",
 
-                    playerVars: {
+            playerVars: {
 
-                        playsinline: 1,
+                playsinline: 1,
 
-                        controls: 1,
+                controls: 1,
 
-                        rel: 0
+                rel: 0
 
-                    },
+            },
 
-                    events: {
+            events: {
 
-                        onReady:
-                            function () {
+                onReady: function () {
 
-                                playerReady = true;
+                    playerReady = true;
 
-                                console.log(
-                                    "YouTube player ready."
-                                );
+                    console.log(
+                        "YouTube player ready."
+                    );
 
-                            },
+                },
 
-                        onStateChange:
-                            handlePlayerState,
+                onStateChange:
+                    handlePlayerState,
 
-                        onError:
-                            function (event) {
+                onError: function (event) {
 
-                                console.error(
-                                    "YouTube error:",
-                                    event.data
-                                );
+                    console.error(
+                        "YouTube error:",
+                        event.data
+                    );
 
-                                alert(
-                                    "This YouTube video cannot be played here. Try another one."
-                                );
-
-                            }
-
-                    }
+                    alert(
+                        "This YouTube video cannot be played here. Try another one."
+                    );
 
                 }
-            );
 
-    };
+            }
+
+        }
+    );
+
+};
 
 
 // ============================================================
@@ -229,9 +163,8 @@ window.onYouTubeIframeAPIReady =
 
 function handlePlayerState(event) {
 
-    if (!window.YT) {
+    if (!window.YT)
         return;
-    }
 
 
     if (
@@ -349,9 +282,8 @@ restartButton.addEventListener(
     "click",
     function () {
 
-        if (!playerReady) {
+        if (!playerReady)
             return;
-        }
 
 
         player.seekTo(
@@ -377,9 +309,8 @@ nextButton.addEventListener(
 
 function nextSong() {
 
-    if (!currentVideos.length) {
+    if (!currentVideos.length)
         return;
-    }
 
 
     currentVideoIndex++;
@@ -408,9 +339,8 @@ previousButton.addEventListener(
     "click",
     function () {
 
-        if (!currentVideos.length) {
+        if (!currentVideos.length)
             return;
-        }
 
 
         currentVideoIndex--;
@@ -440,9 +370,8 @@ shuffleButton.addEventListener(
     "click",
     function () {
 
-        if (!currentVideos.length) {
+        if (!currentVideos.length)
             return;
-        }
 
 
         currentVideoIndex =
@@ -470,9 +399,8 @@ function playCurrentVideo() {
         ];
 
 
-    if (!video) {
+    if (!video)
         return;
-    }
 
 
     const videoId =
@@ -480,9 +408,8 @@ function playCurrentVideo() {
         video.contentDetails?.videoId;
 
 
-    if (!videoId) {
+    if (!videoId)
         return;
-    }
 
 
     songTitle.textContent =
@@ -495,6 +422,8 @@ function playCurrentVideo() {
 
 
     timeline.value = 0;
+
+    timeline.max = 100;
 
     currentTime.textContent =
         "00:00";
@@ -580,10 +509,14 @@ async function searchYouTube() {
             await fetch(
                 url,
                 {
+
                     headers: {
+
                         Authorization:
                             `Bearer ${accessToken}`
+
                     }
+
                 }
             );
 
@@ -597,7 +530,7 @@ async function searchYouTube() {
             console.error(data);
 
             searchResults.innerHTML =
-                "<p>Search failed. Please try again.</p>";
+                "<p>Search failed. Check the browser console.</p>";
 
             return;
 
@@ -661,8 +594,6 @@ searchInput.addEventListener(
             "Enter"
         ) {
 
-            event.preventDefault();
-
             searchYouTube();
 
         }
@@ -705,14 +636,8 @@ function displaySearchResults(results) {
 
 
             const thumbnail =
-                video.snippet
-                    ?.thumbnails
-                    ?.medium
-                    ?.url ||
-                video.snippet
-                    ?.thumbnails
-                    ?.default
-                    ?.url ||
+                video.snippet.thumbnails?.medium?.url ||
+                video.snippet.thumbnails?.default?.url ||
                 "";
 
 
@@ -802,7 +727,8 @@ function stopTimeline() {
             timeTimer
         );
 
-        timeTimer = null;
+        timeTimer =
+            null;
 
     }
 
@@ -829,9 +755,8 @@ function updateTimeline() {
         player.getDuration();
 
 
-    if (!total) {
+    if (!total)
         return;
-    }
 
 
     timeline.max =
@@ -899,7 +824,11 @@ timeline.addEventListener(
     function () {
 
         if (!playerReady) {
+
+            isSeeking = false;
+
             return;
+
         }
 
 
@@ -930,9 +859,8 @@ function updateTimelineVisual(
     total
 ) {
 
-    if (!total) {
+    if (!total)
         return;
-    }
 
 
     const percentage =
@@ -950,9 +878,27 @@ function updateTimelineVisual(
             to right,
             #ff3348 0%,
             #ff3348 ${percentage}%,
-            #24313a ${percentage}%,
-            #24313a 100%
+            #d5d5d5 ${percentage}%,
+            #d5d5d5 100%
         )`;
+
+
+    if (
+        document.body.classList.contains(
+            "dark"
+        )
+    ) {
+
+        timeline.style.background =
+            `linear-gradient(
+                to right,
+                #ff3348 0%,
+                #ff3348 ${percentage}%,
+                #24313a ${percentage}%,
+                #24313a 100%
+            )`;
+
+    }
 
 }
 
@@ -1077,15 +1023,14 @@ youtubeButton.addEventListener(
                 });
 
 
-        tokenClient
-            .requestAccessToken();
+        tokenClient.requestAccessToken();
 
     }
 );
 
 
 // ============================================================
-// THEME BUTTON
+// DARK / LIGHT MODE
 // ============================================================
 
 themeButton.addEventListener(
@@ -1097,12 +1042,37 @@ themeButton.addEventListener(
         );
 
 
-        themeButton.textContent =
+        const darkMode =
             document.body.classList.contains(
                 "dark"
-            )
+            );
+
+
+        themeButton.textContent =
+            darkMode
                 ? "☀"
                 : "◐";
+
+
+        // Update timeline immediately
+        if (playerReady) {
+
+            const current =
+                player.getCurrentTime();
+
+            const total =
+                player.getDuration();
+
+            if (total) {
+
+                updateTimelineVisual(
+                    current,
+                    total
+                );
+
+            }
+
+        }
 
     }
 );
@@ -1134,9 +1104,5 @@ function escapeHTML(text) {
 // ============================================================
 
 console.log(
-    "🕷️ MY VINYLL READY"
-);
-
-console.log(
-    "🇮🇳 Clock timezone: Asia/Kolkata"
+    "🕷️🏹 MY VINYLL READY"
 );

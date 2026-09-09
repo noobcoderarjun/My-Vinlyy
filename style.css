@@ -1,12 +1,8 @@
 /* ============================================================
    MY VINYLL
-   BY ARJUNN
-   BOW & ARROW × SPIDER-MAN
-   ============================================================ */
-
-
-/* ============================================================
-   RESET
+   ARJUN × SPIDER-MAN THEME
+   LIGHT = BOW
+   DARK = SPIDER
    ============================================================ */
 
 * {
@@ -16,51 +12,43 @@
 }
 
 
+/* ============================================================
+   VARIABLES
+   ============================================================ */
+
 :root {
 
-    --black: #080808;
-    --white: #f7f6f2;
-
-    --paper: #f5f4ef;
-    --paper-dark: #e8e6df;
-
-    --text: #111111;
-    --muted: #777777;
+    --black: #05070a;
+    --blue-black: #07131f;
+    --blue: #087ea4;
+    --electric-blue: #13bfe8;
 
     --red: #e21d2f;
     --bright-red: #ff3348;
 
-    --line: rgba(0, 0, 0, .14);
-
-    --shadow:
-        0 20px 60px rgba(0, 0, 0, .10);
+    --white: #f5f7fa;
+    --muted: #66727b;
 
 }
 
 
 /* ============================================================
-   BODY
+   BODY — WHITE MODE
    ============================================================ */
 
 body {
 
     min-height: 100vh;
 
-    color: var(--text);
-
     background:
+        #f7f5ef;
 
-        radial-gradient(
-            circle at 50% 25%,
-            #ffffff 0%,
-            var(--paper) 55%,
-            #e9e7df 100%
-        );
+    color: #171717;
 
     font-family:
-        Georgia,
-        "Times New Roman",
-        serif;
+        Arial,
+        Helvetica,
+        sans-serif;
 
     overflow-x: hidden;
 
@@ -72,38 +60,47 @@ body {
 
 
 /* ============================================================
-   PAPER TEXTURE
+   ARJUN BOW
    ============================================================ */
 
-body::before {
-
-    content: "";
+.arjun-bow {
 
     position: fixed;
 
-    inset: 0;
+    left: 50%;
+    top: 50%;
 
-    pointer-events: none;
+    transform:
+        translate(-50%, -50%);
+
+    width: min(900px, 90vw);
 
     z-index: 0;
 
-    opacity: .18;
+    pointer-events: none;
 
-    background-image:
+    opacity: .075;
 
-        repeating-linear-gradient(
-            90deg,
-            transparent 0,
-            transparent 3px,
-            rgba(0,0,0,.025) 4px,
-            transparent 5px
-        );
+    transition:
+        opacity .45s ease,
+        filter .45s ease;
+
+}
+
+
+.arjun-bow img {
+
+    width: 100%;
+
+    display: block;
+
+    object-fit: contain;
 
 }
 
 
 /* ============================================================
-   SPIDER WEBS
+   WEBS
    ============================================================ */
 
 .web {
@@ -112,32 +109,31 @@ body::before {
 
     pointer-events: none;
 
-    z-index: 0;
-
     opacity: 0;
 
+    z-index: 0;
+
     transition:
-        opacity .5s ease;
+        opacity .45s ease;
 
 }
 
 
 .web-1 {
 
-    width: 520px;
-    height: 520px;
+    width: 450px;
+    height: 450px;
 
-    top: -250px;
-    left: -230px;
+    top: -170px;
+    left: -170px;
 
     border-radius: 50%;
 
     background:
-
         repeating-radial-gradient(
             circle,
             transparent 0 35px,
-            rgba(255,255,255,.9) 36px 37px
+            var(--white) 36px 37px
         );
 
 }
@@ -145,41 +141,19 @@ body::before {
 
 .web-2 {
 
-    width: 600px;
-    height: 600px;
+    width: 500px;
+    height: 500px;
 
-    right: -320px;
-    bottom: -300px;
-
-    border-radius: 50%;
-
-    background:
-
-        repeating-radial-gradient(
-            circle,
-            transparent 0 42px,
-            rgba(255,255,255,.8) 43px 44px
-        );
-
-}
-
-
-.web-3 {
-
-    width: 420px;
-    height: 420px;
-
-    right: -150px;
-    top: -180px;
+    right: -230px;
+    bottom: -250px;
 
     border-radius: 50%;
 
     background:
-
         repeating-radial-gradient(
             circle,
-            transparent 0 32px,
-            rgba(255,255,255,.7) 33px 34px
+            transparent 0 40px,
+            var(--white) 41px 42px
         );
 
 }
@@ -193,12 +167,12 @@ body::before {
 
     position: relative;
 
-    z-index: 10;
+    z-index: 5;
 
     width: 100%;
 
     padding:
-        30px 55px;
+        25px 50px;
 
     display: flex;
 
@@ -208,87 +182,51 @@ body::before {
 
     border-bottom:
         1px solid
-        var(--line);
+        rgba(0,0,0,.08);
 
 }
 
-
-/* ============================================================
-   LOGO
-   ============================================================ */
 
 .logo {
 
-    display: flex;
+    font-size: 22px;
 
-    flex-direction: column;
+    font-weight: 800;
 
-    gap: 5px;
-
-}
-
-
-.logo-title {
-
-    font-size: 23px;
-
-    letter-spacing: 8px;
-
-    font-weight: 500;
+    letter-spacing: 5px;
 
 }
 
 
-.logo-author {
+.spider {
 
     color: var(--red);
 
-    font-family:
-        Arial,
-        Helvetica,
-        sans-serif;
-
-    font-size: 9px;
-
-    font-weight: 700;
-
-    letter-spacing: 4px;
+    margin-right: 8px;
 
 }
 
-
-/* ============================================================
-   NAVIGATION
-   ============================================================ */
 
 nav {
 
     display: flex;
 
-    align-items: center;
-
     gap: 18px;
+
+    align-items: center;
 
 }
 
 
 nav a {
 
-    color: var(--muted);
+    color: #777;
 
     text-decoration: none;
 
-    font-family:
-        Arial,
-        Helvetica,
-        sans-serif;
+    font-size: 11px;
 
-    font-size: 10px;
-
-    letter-spacing: 3px;
-
-    transition:
-        color .2s ease;
+    letter-spacing: 2px;
 
 }
 
@@ -296,15 +234,6 @@ nav a {
 nav a:hover {
 
     color: var(--red);
-
-}
-
-
-nav span {
-
-    color: var(--muted);
-
-    font-size: 10px;
 
 }
 
@@ -317,13 +246,15 @@ main {
 
     position: relative;
 
-    z-index: 3;
+    z-index: 2;
 
-    width:
-        min(1250px, 94%);
+    width: min(
+        1250px,
+        94%
+    );
 
     margin:
-        45px auto 70px;
+        60px auto;
 
     display: grid;
 
@@ -338,60 +269,41 @@ main {
 
 
 /* ============================================================
-   PLAYER SECTION
+   PLAYER
    ============================================================ */
 
 .player-section {
 
-    padding:
-        20px 30px;
+    padding: 30px;
 
 }
 
-
-/* ============================================================
-   NOW PLAYING
-   ============================================================ */
 
 .now-playing {
 
-    color: var(--red);
+    color:
+        var(--red);
 
-    font-family:
-        Arial,
-        Helvetica,
-        sans-serif;
+    font-size: 10px;
 
-    font-size: 9px;
+    font-weight: bold;
 
-    font-weight: 700;
+    letter-spacing: 3px;
 
-    letter-spacing: 4px;
-
-    margin-bottom: 13px;
+    margin-bottom: 12px;
 
 }
 
 
-/* ============================================================
-   SONG INFO
-   ============================================================ */
-
 .song-info h1 {
 
-    font-family:
-        Georgia,
-        "Times New Roman",
-        serif;
-
-    font-size:
-        clamp(32px, 4vw, 52px);
-
-    font-weight: 500;
+    font-size: clamp(
+        28px,
+        4vw,
+        48px
+    );
 
     line-height: 1.05;
-
-    letter-spacing: -.5px;
 
     max-width: 650px;
 
@@ -400,20 +312,12 @@ main {
 
 .song-info p {
 
-    margin-top: 12px;
+    margin-top: 10px;
 
-    color: var(--muted);
+    color:
+        #737373;
 
-    font-family:
-        Arial,
-        Helvetica,
-        sans-serif;
-
-    font-size: 11px;
-
-    letter-spacing: 3px;
-
-    text-transform: uppercase;
+    font-size: 14px;
 
 }
 
@@ -433,7 +337,7 @@ main {
 
     gap: 12px;
 
-    margin-top: 38px;
+    margin-top: 35px;
 
 }
 
@@ -444,9 +348,10 @@ main {
         "Courier New",
         monospace;
 
-    font-size: 10px;
+    font-size: 11px;
 
-    color: var(--muted);
+    color:
+        #777;
 
 }
 
@@ -455,16 +360,11 @@ main {
 
     width: 100%;
 
-    height: 4px;
+    height: 5px;
 
     appearance: none;
 
-    border: none;
-
-    border-radius: 20px;
-
     background:
-
         linear-gradient(
             to right,
             var(--red) 0%,
@@ -473,20 +373,19 @@ main {
             #d5d5d5 100%
         );
 
+    border-radius: 10px;
+
     cursor: pointer;
 
 }
 
 
-/* Chrome */
-
 #timeline::-webkit-slider-thumb {
 
     appearance: none;
 
-    width: 14px;
-
-    height: 14px;
+    width: 15px;
+    height: 15px;
 
     border-radius: 50%;
 
@@ -494,23 +393,19 @@ main {
         var(--red);
 
     border:
-        2px solid
-        white;
+        2px solid white;
 
     box-shadow:
-        0 2px 8px
-        rgba(0,0,0,.2);
+        0 0 10px
+        rgba(226,29,47,.4);
 
 }
 
 
-/* Firefox */
-
 #timeline::-moz-range-thumb {
 
-    width: 14px;
-
-    height: 14px;
+    width: 15px;
+    height: 15px;
 
     border-radius: 50%;
 
@@ -518,8 +413,7 @@ main {
         var(--red);
 
     border:
-        2px solid
-        white;
+        2px solid white;
 
 }
 
@@ -534,18 +428,17 @@ main {
 
     align-items: center;
 
-    gap: 18px;
+    gap: 22px;
 
-    margin-top: 27px;
+    margin-top: 28px;
 
 }
 
 
 .controls button {
 
-    width: 42px;
-
-    height: 42px;
+    width: 40px;
+    height: 40px;
 
     border:
         1px solid
@@ -553,66 +446,53 @@ main {
 
     border-radius: 50%;
 
-    color: var(--text);
+    color:
+        #222;
 
     background:
         rgba(255,255,255,.65);
 
     cursor: pointer;
 
-    font-family:
-        Arial,
-        Helvetica,
-        sans-serif;
-
     transition:
-        .25s ease;
-
-    box-shadow:
-        0 5px 15px
-        rgba(0,0,0,.04);
+        .2s ease;
 
 }
 
 
 .controls button:hover {
 
-    color: white;
-
     background:
         var(--red);
 
-    border-color:
-        var(--red);
-
-    transform:
-        translateY(-3px);
+    color: white;
 
     box-shadow:
-        0 8px 20px
+        0 0 20px
         rgba(226,29,47,.25);
+
+    transform:
+        translateY(-2px);
 
 }
 
 
 .controls .play-button {
 
-    width: 64px;
-
-    height: 64px;
-
-    color: white;
+    width: 62px;
+    height: 62px;
 
     background:
         var(--red);
 
-    border:
-        none;
+    color: white;
 
     font-size: 19px;
 
+    border: none;
+
     box-shadow:
-        0 10px 30px
+        0 0 25px
         rgba(226,29,47,.25);
 
 }
@@ -632,7 +512,7 @@ main {
 
 .search-box {
 
-    margin-top: 36px;
+    margin-top: 35px;
 
     display: flex;
 
@@ -642,27 +522,15 @@ main {
 
     border:
         1px solid
-        rgba(0,0,0,.16);
+        rgba(0,0,0,.15);
 
     border-radius: 14px;
 
     background:
         rgba(255,255,255,.65);
 
-    transition:
-        .25s ease;
-
-}
-
-
-.search-box:focus-within {
-
-    border-color:
-        var(--red);
-
-    box-shadow:
-        0 0 0 3px
-        rgba(226,29,47,.06);
+    backdrop-filter:
+        blur(10px);
 
 }
 
@@ -670,16 +538,6 @@ main {
 .search-icon {
 
     margin-left: 13px;
-
-    color:
-        var(--red);
-
-    font-family:
-        Arial,
-        Helvetica,
-        sans-serif;
-
-    font-size: 23px;
 
 }
 
@@ -691,7 +549,7 @@ main {
     min-width: 0;
 
     padding:
-        13px 12px;
+        14px 12px;
 
     border: none;
 
@@ -699,14 +557,9 @@ main {
 
     background: transparent;
 
-    color: var(--text);
+    color: #111;
 
-    font-family:
-        Arial,
-        Helvetica,
-        sans-serif;
-
-    font-size: 13px;
+    font-size: 14px;
 
 }
 
@@ -714,7 +567,7 @@ main {
 #search::placeholder {
 
     color:
-        #999;
+        #8a8a8a;
 
 }
 
@@ -726,28 +579,20 @@ main {
     border-radius: 10px;
 
     padding:
-        12px 19px;
+        12px 18px;
 
     background:
         var(--red);
 
     color: white;
 
-    font-family:
-        Arial,
-        Helvetica,
-        sans-serif;
-
     font-weight: bold;
 
-    font-size: 9px;
+    font-size: 10px;
 
-    letter-spacing: 2px;
+    letter-spacing: 1px;
 
     cursor: pointer;
-
-    transition:
-        .2s ease;
 
 }
 
@@ -760,16 +605,6 @@ main {
 }
 
 
-#search-button:disabled {
-
-    opacity: .6;
-
-    cursor:
-        wait;
-
-}
-
-
 /* ============================================================
    SEARCH RESULTS
    ============================================================ */
@@ -778,13 +613,13 @@ main {
 
     display: none;
 
-    margin-top: 14px;
+    margin-top: 15px;
 
-    max-height: 350px;
+    max-height: 360px;
 
     overflow-y: auto;
 
-    padding-right: 3px;
+    border-radius: 12px;
 
 }
 
@@ -799,19 +634,14 @@ main {
 
     margin-bottom: 7px;
 
-    border:
-        1px solid
-        rgba(0,0,0,.07);
-
-    border-radius: 11px;
+    border-radius: 10px;
 
     background:
-        rgba(255,255,255,.65);
+        rgba(0,0,0,.045);
 
     cursor: pointer;
 
-    transition:
-        .2s ease;
+    transition: .2s;
 
 }
 
@@ -819,10 +649,7 @@ main {
 .search-result:hover {
 
     background:
-        rgba(226,29,47,.07);
-
-    border-color:
-        rgba(226,29,47,.25);
+        rgba(226,29,47,.10);
 
     transform:
         translateX(3px);
@@ -847,21 +674,14 @@ main {
 
     min-width: 0;
 
-    padding-top: 2px;
-
 }
 
 
 .result-title {
 
-    font-family:
-        Arial,
-        Helvetica,
-        sans-serif;
-
     font-size: 13px;
 
-    font-weight: 600;
+    font-weight: bold;
 
     white-space: nowrap;
 
@@ -875,132 +695,22 @@ main {
 .result-channel {
 
     color:
-        var(--muted);
+        #777;
 
-    font-family:
-        Arial,
-        Helvetica,
-        sans-serif;
+    font-size: 11px;
 
-    font-size: 10px;
-
-    margin-top: 6px;
+    margin-top: 5px;
 
 }
 
 
 /* ============================================================
-   BOW & ARROW
-   ============================================================ */
-
-.bow-arrow {
-
-    position: absolute;
-
-    width:
-        min(560px, 45vw);
-
-    height: 390px;
-
-    top: -175px;
-
-    left: 50%;
-
-    transform:
-        translateX(-50%);
-
-    z-index: 0;
-
-    pointer-events: none;
-
-}
-
-
-.bow-svg {
-
-    width: 100%;
-
-    height: 100%;
-
-    overflow: visible;
-
-}
-
-
-.bow {
-
-    fill: none;
-
-    stroke:
-        #171717;
-
-    stroke-width: 3;
-
-    stroke-linecap: round;
-
-    stroke-linejoin: round;
-
-}
-
-
-.arrow {
-
-    stroke:
-        #171717;
-
-    stroke-width: 2;
-
-}
-
-
-.arrow-head {
-
-    fill:
-        #171717;
-
-}
-
-
-.feather {
-
-    fill:
-        none;
-
-    stroke:
-        #171717;
-
-    stroke-width: 2.5;
-
-    stroke-linecap: round;
-
-}
-
-
-.feather-left,
-.feather-right {
-
-    fill: none;
-
-}
-
-
-.arrow-center {
-
-    fill:
-        var(--red);
-
-}
-
-
-/* ============================================================
-   TURN TABLE
+   VINYL
    ============================================================ */
 
 .turntable {
 
     position: relative;
-
-    min-height: 500px;
 
     display: flex;
 
@@ -1011,45 +721,35 @@ main {
 }
 
 
-/* ============================================================
-   VINYL
-   ============================================================ */
-
 .record {
 
     width:
-        min(390px, 34vw);
+        min(420px, 38vw);
 
     height:
-        min(390px, 34vw);
+        min(420px, 38vw);
 
     min-width: 280px;
-
     min-height: 280px;
 
     border-radius: 50%;
 
     position: relative;
 
-    z-index: 2;
-
     background:
-
         radial-gradient(
             circle,
-            #252525 0 4%,
-            #111 5% 12%,
-            #242424 13% 14%,
-            #080808 15% 23%,
-            #202020 24% 25%,
-            #080808 26% 100%
+            #252525 0 5%,
+            #101010 6% 14%,
+            #292929 15% 16%,
+            #0b0b0b 17% 25%,
+            #292929 26% 27%,
+            #080808 28% 100%
         );
 
     box-shadow:
-
-        0 30px 70px
+        0 30px 80px
         rgba(0,0,0,.25),
-
         inset 0 0 50px
         rgba(0,0,0,.8);
 
@@ -1068,7 +768,7 @@ main {
 
     border:
         1px solid
-        rgba(255,255,255,.08);
+        rgba(255,255,255,.15);
 
 }
 
@@ -1078,15 +778,13 @@ main {
     position: absolute;
 
     width: 105px;
-
     height: 105px;
 
     left: 50%;
-
     top: 50%;
 
     transform:
-        translate(-50%, -50%);
+        translate(-50%,-50%);
 
     border-radius: 50%;
 
@@ -1099,36 +797,25 @@ main {
     text-align: center;
 
     background:
-
         radial-gradient(
             circle,
-            #f4f2eb 0 30%,
+            var(--blue) 0 30%,
             var(--red) 31% 75%,
-            #8d111c 76% 100%
+            #770e1a 76% 100%
         );
-
-    box-shadow:
-        0 0 25px
-        rgba(226,29,47,.25);
 
 }
 
 
 .record-label span {
 
-    color:
-        #111;
-
-    font-family:
-        Georgia,
-        "Times New Roman",
-        serif;
-
-    font-size: 10px;
+    font-size: 11px;
 
     font-weight: 900;
 
     letter-spacing: 2px;
+
+    color: white;
 
 }
 
@@ -1138,20 +825,18 @@ main {
     position: absolute;
 
     width: 12px;
-
     height: 12px;
 
     left: 50%;
-
     top: 50%;
 
     transform:
-        translate(-50%, -50%);
+        translate(-50%,-50%);
 
     border-radius: 50%;
 
     background:
-        #050505;
+        #05070a;
 
     z-index: 3;
 
@@ -1169,13 +854,11 @@ main {
 @keyframes spin {
 
     from {
-        transform:
-            rotate(0deg);
+        transform: rotate(0deg);
     }
 
     to {
-        transform:
-            rotate(360deg);
+        transform: rotate(360deg);
     }
 
 }
@@ -1193,14 +876,12 @@ main {
 
     height: 220px;
 
-    right: -15px;
+    right: -20px;
 
-    top: 25px;
+    top: -60px;
 
     transform:
         rotate(12deg);
-
-    z-index: 4;
 
 }
 
@@ -1210,21 +891,19 @@ main {
     position: absolute;
 
     width: 65px;
-
     height: 65px;
 
     right: 0;
-
     top: 0;
 
     border-radius: 50%;
 
     background:
-        #202020;
+        #ececec;
 
     border:
         2px solid
-        #444;
+        #bbb;
 
 }
 
@@ -1234,17 +913,15 @@ main {
     position: absolute;
 
     width: 135px;
-
-    height: 9px;
+    height: 10px;
 
     top: 45px;
-
     right: 35px;
 
     border-radius: 10px;
 
     background:
-        #aaa;
+        #555;
 
     transform:
         rotate(35deg);
@@ -1260,11 +937,9 @@ main {
     position: absolute;
 
     left: -12px;
-
     bottom: -7px;
 
     width: 24px;
-
     height: 18px;
 
     background:
@@ -1281,13 +956,13 @@ main {
 
     position: relative;
 
-    z-index: 5;
+    z-index: 3;
 
     width:
         min(650px, 90%);
 
     margin:
-        0 auto 45px;
+        0 auto 40px;
 
 }
 
@@ -1295,18 +970,13 @@ main {
 .youtube-title {
 
     color:
-        var(--muted);
-
-    font-family:
-        Arial,
-        Helvetica,
-        sans-serif;
+        #777;
 
     font-size: 9px;
 
-    letter-spacing: 4px;
+    letter-spacing: 3px;
 
-    margin-bottom: 11px;
+    margin-bottom: 10px;
 
 }
 
@@ -1315,8 +985,7 @@ main {
 
     width: 100%;
 
-    aspect-ratio:
-        16 / 9;
+    aspect-ratio: 16 / 9;
 
 }
 
@@ -1331,10 +1000,6 @@ main {
 
     border-radius: 14px;
 
-    box-shadow:
-        0 20px 50px
-        rgba(0,0,0,.15);
-
 }
 
 
@@ -1346,18 +1011,16 @@ footer {
 
     position: relative;
 
-    z-index: 10;
+    z-index: 5;
 
     display: flex;
 
     justify-content: center;
 
-    align-items: center;
-
     gap: 15px;
 
     padding:
-        20px 30px 40px;
+        20px 30px 35px;
 
 }
 
@@ -1373,160 +1036,64 @@ footer {
         rgba(255,255,255,.65);
 
     color:
-        var(--text);
+        #222;
 
     padding:
-        11px 18px;
+        11px 17px;
 
     border-radius: 10px;
 
     cursor: pointer;
 
-    font-family:
-        Arial,
-        Helvetica,
-        sans-serif;
-
-    font-size: 9px;
-
-    letter-spacing: 2px;
-
-    transition:
-        .25s ease;
-
 }
 
 
-.theme-button:hover,
 .login-button:hover {
-
-    color: white;
 
     background:
         var(--red);
 
-    border-color:
-        var(--red);
-
-}
-
-
-.login-button:disabled {
-
-    opacity: .7;
-
-    cursor:
-        default;
+    color: white;
 
 }
 
 
 /* ============================================================
-   ============================================================
    DARK MODE — SPIDER-MAN
-   ============================================================
    ============================================================ */
 
 body.dark {
 
-    --text:
-        #f4f4f4;
-
-    --muted:
-        #89929b;
-
-    --line:
-        rgba(255,255,255,.10);
-
     background:
-
         radial-gradient(
-            circle at 50% 35%,
-            #171c22 0%,
-            #080b0f 45%,
-            #020304 100%
+            circle at 50% 40%,
+            #102b3d 0%,
+            #07131f 35%,
+            #030508 75%
         );
 
     color:
-        #f4f4f4;
+        var(--white);
 
 }
 
 
-/* ============================================================
-   DARK PAPER TEXTURE
-   ============================================================ */
+body.dark .arjun-bow {
 
-body.dark::before {
+    opacity: .025;
 
-    opacity: .10;
-
-    background-image:
-
-        repeating-linear-gradient(
-            90deg,
-            transparent 0,
-            transparent 3px,
-            rgba(255,255,255,.03) 4px,
-            transparent 5px
-        );
+    filter:
+        invert(1);
 
 }
 
-
-/* ============================================================
-   DARK WEBS
-   ============================================================ */
 
 body.dark .web {
 
-    opacity: .16;
+    opacity: .10;
 
 }
 
-
-body.dark .web-1 {
-
-    background:
-
-        repeating-radial-gradient(
-            circle,
-            transparent 0 35px,
-            rgba(255,255,255,.8) 36px 37px
-        );
-
-}
-
-
-body.dark .web-2 {
-
-    background:
-
-        repeating-radial-gradient(
-            circle,
-            transparent 0 42px,
-            rgba(255,255,255,.7) 43px 44px
-        );
-
-}
-
-
-body.dark .web-3 {
-
-    background:
-
-        repeating-radial-gradient(
-            circle,
-            transparent 0 32px,
-            rgba(226,29,47,.8) 33px 34px
-        );
-
-}
-
-
-/* ============================================================
-   DARK HEADER
-   ============================================================ */
 
 body.dark .top-bar {
 
@@ -1537,88 +1104,10 @@ body.dark .top-bar {
 }
 
 
-body.dark .logo-title {
-
-    color:
-        #f5f5f5;
-
-}
-
-
 body.dark nav a {
 
     color:
-        #858d95;
-
-}
-
-
-body.dark nav a:hover {
-
-    color:
-        var(--bright-red);
-
-}
-
-
-/* ============================================================
-   DARK BOW
-   ============================================================ */
-
-body.dark .bow {
-
-    stroke:
-        #f4f4f4;
-
-    filter:
-        drop-shadow(
-            0 0 4px
-            rgba(255,255,255,.15)
-        );
-
-}
-
-
-body.dark .arrow {
-
-    stroke:
-        #f4f4f4;
-
-}
-
-
-body.dark .arrow-head {
-
-    fill:
-        #f4f4f4;
-
-}
-
-
-body.dark .feather {
-
-    stroke:
-        #f4f4f4;
-
-}
-
-
-body.dark .arrow-center {
-
-    fill:
-        var(--bright-red);
-
-}
-
-
-/* ============================================================
-   DARK PLAYER
-   ============================================================ */
-
-body.dark .song-info h1 {
-
-    color:
-        #f5f5f5;
+        var(--muted);
 
 }
 
@@ -1626,108 +1115,58 @@ body.dark .song-info h1 {
 body.dark .song-info p {
 
     color:
-        #818b94;
+        var(--muted);
 
 }
 
 
-/* ============================================================
-   DARK TIMELINE
-   ============================================================ */
+body.dark .timeline-area span {
+
+    color:
+        var(--muted);
+
+}
+
 
 body.dark #timeline {
 
     background:
-
         linear-gradient(
             to right,
-            var(--bright-red) 0%,
-            var(--bright-red) 0%,
-            #26313a 0%,
-            #26313a 100%
+            var(--red) 0%,
+            var(--red) 0%,
+            #24313a 0%,
+            #24313a 100%
         );
 
 }
 
 
-body.dark #timeline::-webkit-slider-thumb {
-
-    border-color:
-        #080b0f;
-
-}
-
-
-/* ============================================================
-   DARK CONTROLS
-   ============================================================ */
-
 body.dark .controls button {
 
     color:
-        #eeeeee;
+        var(--white);
 
     background:
-        rgba(255,255,255,.04);
+        rgba(255,255,255,.06);
 
-    border-color:
-        rgba(255,255,255,.10);
+    border: none;
 
 }
 
-
-body.dark .controls button:hover {
-
-    color:
-        white;
-
-    background:
-        var(--red);
-
-    border-color:
-        var(--red);
-
-}
-
-
-body.dark .controls .play-button {
-
-    color:
-        white;
-
-    background:
-        var(--red);
-
-}
-
-
-/* ============================================================
-   DARK SEARCH
-   ============================================================ */
 
 body.dark .search-box {
 
+    border:
+        1px solid
+        rgba(19,191,232,.35);
+
     background:
-        rgba(0,0,0,.35);
-
-    border-color:
-        rgba(255,255,255,.15);
+        rgba(0,0,0,.3);
 
     box-shadow:
-        0 0 30px
-        rgba(226,29,47,.04);
-
-}
-
-
-body.dark .search-box:focus-within {
-
-    border-color:
-        var(--bright-red);
-
-    box-shadow:
-        0 0 0 3px
-        rgba(226,29,47,.08);
+        0 0 25px
+        rgba(19,191,232,.05);
 
 }
 
@@ -1743,22 +1182,15 @@ body.dark #search {
 body.dark #search::placeholder {
 
     color:
-        #65707a;
+        #657987;
 
 }
 
 
-/* ============================================================
-   DARK SEARCH RESULTS
-   ============================================================ */
-
 body.dark .search-result {
 
     background:
-        rgba(255,255,255,.035);
-
-    border-color:
-        rgba(255,255,255,.07);
+        rgba(255,255,255,.045);
 
 }
 
@@ -1766,116 +1198,79 @@ body.dark .search-result {
 body.dark .search-result:hover {
 
     background:
-        rgba(226,29,47,.12);
-
-    border-color:
-        rgba(226,29,47,.3);
+        rgba(226,29,47,.15);
 
 }
 
 
-body.dark .result-title {
+body.dark .result-channel {
 
     color:
-        #eeeeee;
+        var(--muted);
 
 }
 
-
-/* ============================================================
-   DARK VINYL
-   ============================================================ */
-
-body.dark .record {
-
-    box-shadow:
-
-        0 30px 80px
-        rgba(0,0,0,.75),
-
-        0 0 40px
-        rgba(226,29,47,.04),
-
-        inset 0 0 50px
-        rgba(0,0,0,.8);
-
-}
-
-
-/* ============================================================
-   DARK TONEARM
-   ============================================================ */
-
-body.dark .tonearm-base {
-
-    background:
-        #101820;
-
-    border-color:
-        #303b43;
-
-}
-
-
-body.dark .arm {
-
-    background:
-        #858f96;
-
-}
-
-
-/* ============================================================
-   DARK YOUTUBE
-   ============================================================ */
 
 body.dark .youtube-title {
 
     color:
-        #717b84;
+        var(--muted);
 
 }
 
 
-body.dark #youtube-player iframe {
+body.dark .theme-button,
+body.dark .login-button {
 
-    box-shadow:
-        0 20px 60px
-        rgba(0,0,0,.6);
+    border:
+        1px solid
+        rgba(255,255,255,.12);
+
+    background:
+        rgba(255,255,255,.05);
+
+    color:
+        white;
+
+}
+
+
+body.dark .login-button:hover {
+
+    background:
+        var(--red);
 
 }
 
 
 /* ============================================================
-   DARK FOOTER
+   DARK MODE EXTRA SPIDER WEB
    ============================================================ */
 
-body.dark .theme-button,
-body.dark .login-button {
+body.dark::before {
 
-    color:
-        #eeeeee;
+    content: "";
 
-    background:
-        rgba(255,255,255,.035);
+    position: fixed;
 
-    border-color:
-        rgba(255,255,255,.12);
+    inset: 0;
 
-}
+    pointer-events: none;
 
+    z-index: 0;
 
-body.dark .theme-button:hover,
-body.dark .login-button:hover {
+    opacity: .08;
 
-    color:
-        white;
+    background-image:
+        linear-gradient(
+            45deg,
+            transparent 48%,
+            #ffffff 49%,
+            transparent 50%
+        );
 
-    background:
-        var(--red);
-
-    border-color:
-        var(--red);
+    background-size:
+        90px 90px;
 
 }
 
@@ -1889,7 +1284,7 @@ body.dark .login-button:hover {
     .top-bar {
 
         padding:
-            22px 25px;
+            20px;
 
     }
 
@@ -1906,7 +1301,7 @@ body.dark .login-button:hover {
         grid-template-columns:
             1fr;
 
-        gap: 10px;
+        gap: 20px;
 
         margin-top: 30px;
 
@@ -1917,9 +1312,6 @@ body.dark .login-button:hover {
 
         order: 2;
 
-        padding:
-            20px 10px;
-
     }
 
 
@@ -1927,15 +1319,12 @@ body.dark .login-button:hover {
 
         order: 1;
 
-        min-height: 430px;
-
     }
 
 
     .record {
 
         width: 300px;
-
         height: 300px;
 
     }
@@ -1948,105 +1337,38 @@ body.dark .login-button:hover {
     }
 
 
-    .bow-arrow {
+    .arjun-bow {
 
-        width: 480px;
-
-        height: 330px;
-
-        top: -110px;
+        width: 100vw;
 
     }
 
 }
 
 
-/* ============================================================
-   MOBILE
-   ============================================================ */
-
 @media (max-width: 550px) {
 
-    .top-bar {
+    .logo {
 
-        padding:
-            20px;
+        font-size: 16px;
 
-    }
-
-
-    .logo-title {
-
-        font-size: 17px;
-
-        letter-spacing: 5px;
+        letter-spacing: 2px;
 
     }
 
 
-    .logo-author {
+    .search-box {
 
-        font-size: 7px;
-
-        letter-spacing: 3px;
+        flex-wrap: wrap;
 
     }
 
 
-    main {
+    #search-button {
 
-        width:
-            92%;
+        width: 100%;
 
-        margin-top:
-            15px;
-
-    }
-
-
-    .turntable {
-
-        min-height:
-            350px;
-
-    }
-
-
-    .record {
-
-        width:
-            270px;
-
-        height:
-            270px;
-
-        min-width:
-            270px;
-
-        min-height:
-            270px;
-
-    }
-
-
-    .bow-arrow {
-
-        width:
-            390px;
-
-        height:
-            280px;
-
-        top:
-            -80px;
-
-    }
-
-
-    .song-info h1 {
-
-        font-size:
-            32px;
+        margin-top: 3px;
 
     }
 
@@ -2056,79 +1378,6 @@ body.dark .login-button:hover {
         grid-template-columns:
             40px 1fr 40px;
 
-        gap:
-            8px;
-
-    }
-
-
-    .controls {
-
-        gap:
-            10px;
-
-    }
-
-
-    .controls button {
-
-        width:
-            38px;
-
-        height:
-            38px;
-
-    }
-
-
-    .controls .play-button {
-
-        width:
-            58px;
-
-        height:
-            58px;
-
-    }
-
-
-    .search-box {
-
-        flex-wrap:
-            wrap;
-
-    }
-
-
-    #search-button {
-
-        width:
-            100%;
-
-        margin-top:
-            3px;
-
-    }
-
-
-    .youtube-section {
-
-        width:
-            92%;
-
-    }
-
-
-    footer {
-
-        flex-wrap:
-            wrap;
-
     }
 
 }
-
-
-/* ============================================================
-   END
-   ============================================================ */

@@ -1,6 +1,6 @@
 // ============================================================
 // MY VINYLL
-// YouTube Account + Playlists
+// YouTube Vinyl Player
 // ============================================================
 
 
@@ -64,165 +64,224 @@ let currentVideoIndex = 0;
 
 let playing = false;
 
+let youtubePlayer = null;
 
-// ============================================================
-// CREATE PLAYLIST AREA
-// ============================================================
-
-const playlistPanel =
-    document.createElement("div");
-
-playlistPanel.id = "playlist-panel";
-
-playlistPanel.innerHTML = `
-    <div class="playlist-header">
-        <h2>YOUR PLAYLISTS</h2>
-        <button id="close-playlists">×</button>
-    </div>
-
-    <div id="playlist-list">
-        <p>Connect YouTube to see your playlists.</p>
-    </div>
-
-    <div id="video-list"></div>
-`;
-
-document.body.appendChild(playlistPanel);
+let youtubeReady = false;
 
 
 // ============================================================
-// BASIC PANEL STYLE
+// YOUTUBE IFRAME API
 // ============================================================
 
-const panelStyle =
-    document.createElement("style");
+window.onYouTubeIframeAPIReady = function () {
 
-panelStyle.textContent = `
+    youtubePlayer =
+        new YT.Player(
+            "youtube-player",
+            {
 
-#playlist-panel {
-    position: fixed;
-    top: 30px;
-    right: 30px;
+                height: "1",
 
-    width: 360px;
-    max-height: 80vh;
+                width: "1",
 
-    background: rgba(245, 242, 232, 0.97);
+                videoId: "",
 
-    border: 1px solid #aaa;
+                playerVars: {
 
-    border-radius: 18px;
+                    playsinline: 1,
 
-    padding: 24px;
+                    controls: 0,
 
-    z-index: 9999;
+                    rel: 0
 
-    overflow-y: auto;
+                },
 
-    box-shadow:
-        0 20px 60px rgba(0,0,0,0.18);
+                events: {
 
-    display: none;
-}
+                    onReady:
+                        function () {
 
-.dark #playlist-panel {
-    background: rgba(15, 39, 56, 0.98);
-    color: white;
-}
+                            youtubeReady = true;
 
-.playlist-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+                            console.log(
+                                "YouTube player ready."
+                            );
 
-    margin-bottom: 20px;
-}
+                        },
 
-.playlist-header h2 {
-    font-size: 15px;
-    letter-spacing: 3px;
-}
+                    onStateChange:
+                        function (event) {
 
-#close-playlists {
-    border: none;
-    background: none;
+                            handlePlayerState(
+                                event
+                            );
 
-    font-size: 25px;
+                        },
 
-    cursor: pointer;
-}
+                    onError:
+                        function (event) {
 
-.playlist-item {
-    padding: 14px;
+                            console.error(
+                                "YouTube player error:",
+                                event.data
+                            );
 
-    margin-bottom: 8px;
+                            alert(
+                                "YouTube couldn't play this video. Try another video."
+                            );
 
-    border-radius: 10px;
+                        },
 
-    cursor: pointer;
+                    onAutoplayBlocked:
+                        function () {
 
-    transition: 0.2s;
+                            console.log(
+                                "YouTube autoplay was blocked."
+                            );
 
-    border: 1px solid transparent;
-}
+                        }
 
-.playlist-item:hover {
-    border-color: #777;
-    transform: translateX(3px);
-}
+                }
 
-.video-item {
-    padding: 12px;
+            }
+        );
 
-    margin: 6px 0;
-
-    border-radius: 8px;
-
-    cursor: pointer;
-
-    font-size: 13px;
-}
-
-.video-item:hover {
-    background: rgba(120,120,120,0.15);
-}
-
-.playlist-title {
-    font-weight: bold;
-}
-
-.playlist-count {
-    opacity: 0.6;
-    font-size: 12px;
-    margin-top: 4px;
-}
-
-`;
-
-
-document.head.appendChild(panelStyle);
+};
 
 
 // ============================================================
-// CLOSE PLAYLIST PANEL
+// PLAYER STATE
 // ============================================================
 
-document
-    .getElementById("close-playlists")
-    .addEventListener("click", () => {
+function handlePlayerState(event) {
 
-        playlistPanel.style.display = "none";
+    if (!window.YT) return;
 
-    });
+
+    if (
+        event.data ===
+        YT.PlayerState.PLAYING
+    ) {
+
+        playing = true;
+
+        record.classList.add(
+            "spinning"
+        );
+
+        playButton.textContent =
+            "Ⅱ";
+
+        startTimeCounter();
+
+    }
+
+
+    else if (
+        event.data ===
+        YT.PlayerState.PAUSED
+    ) {
+
+        playing = false;
+
+        record.classList.remove(
+            "spinning"
+        );
+
+        playButton.textContent =
+            "▶";
+
+    }
+
+
+    else if (
+        event.data ===
+        YT.PlayerState.ENDED
+    ) {
+
+        playing = false;
+
+        record.classList.remove(
+            "spinning"
+        );
+
+        playButton.textContent =
+            "▶";
+
+
+        playNextVideo();
+
+    }
+
+}
 
 
 // ============================================================
-// VINYL PLAY / PAUSE
+// TIME DISPLAY
+// ============================================================
+
+let timeTimer = null;
+
+
+function startTimeCounter() {
+
+    clearInterval(
+        timeTimer
+    );
+
+
+    timeTimer =
+        setInterval(
+            function () {
+
+                if (
+                    !youtubePlayer ||
+                    !youtubeReady
+                ) {
+
+                    return;
+
+                }
+
+
+                const current =
+                    youtubePlayer
+                        .getCurrentTime();
+
+
+                const minutes =
+                    Math.floor(
+                        current / 60
+                    );
+
+
+                const seconds =
+                    Math.floor(
+                        current % 60
+                    );
+
+
+                timeDisplay.textContent =
+                    String(minutes)
+                        .padStart(2, "0")
+                    + ":"
+                    + String(seconds)
+                        .padStart(2, "0");
+
+            },
+            500
+        );
+
+}
+
+
+// ============================================================
+// PLAY / PAUSE
 // ============================================================
 
 playButton.addEventListener(
     "click",
-    () => {
+    function () {
 
         if (!currentVideos.length) {
 
@@ -234,19 +293,28 @@ playButton.addEventListener(
 
         }
 
-        playing = !playing;
+
+        if (
+            !youtubePlayer ||
+            !youtubeReady
+        ) {
+
+            alert(
+                "YouTube player is still loading. Try again in a moment."
+            );
+
+            return;
+
+        }
+
 
         if (playing) {
 
-            record.classList.add("spinning");
-
-            playButton.textContent = "Ⅱ";
+            youtubePlayer.pauseVideo();
 
         } else {
 
-            record.classList.remove("spinning");
-
-            playButton.textContent = "▶";
+            youtubePlayer.playVideo();
 
         }
 
@@ -262,13 +330,20 @@ document
     .getElementById("restart")
     .addEventListener(
         "click",
-        () => {
+        function () {
 
-            if (!currentVideos.length) return;
+            if (
+                !youtubePlayer ||
+                !youtubeReady
+            ) return;
 
-            currentVideoIndex = 0;
 
-            showCurrentVideo();
+            youtubePlayer.seekTo(
+                0,
+                true
+            );
+
+            youtubePlayer.playVideo();
 
         }
     );
@@ -282,18 +357,24 @@ document
     .getElementById("previous")
     .addEventListener(
         "click",
-        () => {
+        function () {
 
-            if (!currentVideos.length) return;
+            if (!currentVideos.length)
+                return;
+
 
             currentVideoIndex--;
 
-            if (currentVideoIndex < 0) {
+
+            if (
+                currentVideoIndex < 0
+            ) {
 
                 currentVideoIndex =
                     currentVideos.length - 1;
 
             }
+
 
             showCurrentVideo();
 
@@ -309,25 +390,44 @@ document
     .getElementById("next")
     .addEventListener(
         "click",
-        () => {
+        function () {
 
-            if (!currentVideos.length) return;
+            if (!currentVideos.length)
+                return;
 
-            currentVideoIndex++;
 
-            if (
-                currentVideoIndex >=
-                currentVideos.length
-            ) {
-
-                currentVideoIndex = 0;
-
-            }
-
-            showCurrentVideo();
+            playNextVideo();
 
         }
     );
+
+
+// ============================================================
+// PLAY NEXT
+// ============================================================
+
+function playNextVideo() {
+
+    if (!currentVideos.length)
+        return;
+
+
+    currentVideoIndex++;
+
+
+    if (
+        currentVideoIndex >=
+        currentVideos.length
+    ) {
+
+        currentVideoIndex = 0;
+
+    }
+
+
+    showCurrentVideo();
+
+}
 
 
 // ============================================================
@@ -338,15 +438,18 @@ document
     .getElementById("shuffle")
     .addEventListener(
         "click",
-        () => {
+        function () {
 
-            if (!currentVideos.length) return;
+            if (!currentVideos.length)
+                return;
+
 
             currentVideoIndex =
                 Math.floor(
                     Math.random() *
                     currentVideos.length
                 );
+
 
             showCurrentVideo();
 
@@ -360,19 +463,26 @@ document
 
 themeButton.addEventListener(
     "click",
-    () => {
+    function () {
 
-        document.body.classList.toggle("dark");
+        document.body.classList.toggle(
+            "dark"
+        );
+
 
         if (
-            document.body.classList.contains("dark")
+            document.body.classList.contains(
+                "dark"
+            )
         ) {
 
-            themeButton.textContent = "☀";
+            themeButton.textContent =
+                "☀";
 
         } else {
 
-            themeButton.textContent = "◐";
+            themeButton.textContent =
+                "◐";
 
         }
 
@@ -381,12 +491,254 @@ themeButton.addEventListener(
 
 
 // ============================================================
-// CONNECT YOUTUBE
+// PLAYLIST PANEL
+// ============================================================
+
+const playlistPanel =
+    document.createElement("div");
+
+playlistPanel.id =
+    "playlist-panel";
+
+
+playlistPanel.innerHTML = `
+
+    <div class="playlist-header">
+
+        <h2>
+            YOUR PLAYLISTS
+        </h2>
+
+        <button id="close-playlists">
+            ×
+        </button>
+
+    </div>
+
+
+    <div id="playlist-list">
+        Connect YouTube to see your playlists.
+    </div>
+
+
+    <div id="video-list"></div>
+
+`;
+
+
+document.body.appendChild(
+    playlistPanel
+);
+
+
+// ============================================================
+// PANEL STYLE
+// ============================================================
+
+const panelStyle =
+    document.createElement("style");
+
+
+panelStyle.textContent = `
+
+#playlist-panel {
+
+    position: fixed;
+
+    top: 30px;
+
+    right: 30px;
+
+    width: 360px;
+
+    max-height: 80vh;
+
+    background: rgba(245,242,232,.98);
+
+    border: 1px solid #aaa;
+
+    border-radius: 18px;
+
+    padding: 24px;
+
+    z-index: 9999;
+
+    overflow-y: auto;
+
+    box-shadow:
+        0 20px 60px rgba(0,0,0,.18);
+
+    display: none;
+
+}
+
+
+.dark #playlist-panel {
+
+    background:
+        rgba(15,39,56,.98);
+
+    color: white;
+
+}
+
+
+.playlist-header {
+
+    display: flex;
+
+    justify-content:
+        space-between;
+
+    align-items:
+        center;
+
+    margin-bottom: 20px;
+
+}
+
+
+.playlist-header h2 {
+
+    font-size: 15px;
+
+    letter-spacing: 3px;
+
+}
+
+
+#close-playlists {
+
+    border: none;
+
+    background: none;
+
+    font-size: 25px;
+
+    cursor: pointer;
+
+}
+
+
+.playlist-item {
+
+    padding: 14px;
+
+    margin-bottom: 8px;
+
+    border-radius: 10px;
+
+    cursor: pointer;
+
+    transition: .2s;
+
+    border:
+        1px solid transparent;
+
+}
+
+
+.playlist-item:hover {
+
+    border-color: #777;
+
+    transform:
+        translateX(3px);
+
+}
+
+
+.playlist-title {
+
+    font-weight: bold;
+
+}
+
+
+.playlist-count {
+
+    opacity: .6;
+
+    font-size: 12px;
+
+    margin-top: 4px;
+
+}
+
+
+.video-item {
+
+    padding: 12px;
+
+    margin: 6px 0;
+
+    border-radius: 8px;
+
+    cursor: pointer;
+
+    font-size: 13px;
+
+}
+
+
+.video-item:hover {
+
+    background:
+        rgba(120,120,120,.15);
+
+}
+
+
+#youtube-player-container {
+
+    position: fixed;
+
+    width: 1px;
+
+    height: 1px;
+
+    overflow: hidden;
+
+    left: -10px;
+
+    bottom: 0;
+
+}
+
+`;
+
+
+document.head.appendChild(
+    panelStyle
+);
+
+
+// ============================================================
+// CLOSE PLAYLISTS
+// ============================================================
+
+document
+    .getElementById(
+        "close-playlists"
+    )
+    .addEventListener(
+        "click",
+        function () {
+
+            playlistPanel.style.display =
+                "none";
+
+        }
+    );
+
+
+// ============================================================
+// GOOGLE LOGIN
 // ============================================================
 
 youtubeButton.addEventListener(
     "click",
-    () => {
+    function () {
 
         if (
             CLIENT_ID ===
@@ -408,7 +760,7 @@ youtubeButton.addEventListener(
         ) {
 
             alert(
-                "Google is still loading. Refresh the page and try again."
+                "Google is still loading. Refresh the page."
             );
 
             return;
@@ -417,53 +769,58 @@ youtubeButton.addEventListener(
 
 
         const tokenClient =
-            google.accounts.oauth2.initTokenClient({
+            google.accounts.oauth2
+                .initTokenClient({
 
-                client_id: CLIENT_ID,
+                    client_id:
+                        CLIENT_ID,
 
-                scope: YOUTUBE_SCOPE,
+                    scope:
+                        YOUTUBE_SCOPE,
 
-                callback:
-                    async (response) => {
+                    callback:
+                        async function (
+                            response
+                        ) {
 
-                        if (response.error) {
+                            if (
+                                response.error
+                            ) {
 
-                            console.error(response);
+                                console.error(
+                                    response
+                                );
 
-                            alert(
-                                "YouTube authorization failed."
-                            );
+                                alert(
+                                    "YouTube authorization failed."
+                                );
 
-                            return;
+                                return;
+
+                            }
+
+
+                            youtubeAccessToken =
+                                response.access_token;
+
+
+                            youtubeButton.textContent =
+                                "YOUTUBE CONNECTED ✓";
+
+
+                            youtubeButton.disabled =
+                                true;
+
+
+                            await loadPlaylists();
 
                         }
 
-
-                        youtubeAccessToken =
-                            response.access_token;
+                });
 
 
-                        youtubeButton.textContent =
-                            "YOUTUBE CONNECTED ✓";
-
-
-                        youtubeButton.disabled =
-                            true;
-
-
-                        console.log(
-                            "YouTube connected."
-                        );
-
-
-                        await loadPlaylists();
-
-                    }
-
-            });
-
-
-        tokenClient.requestAccessToken();
+        tokenClient
+            .requestAccessToken();
 
     }
 );
@@ -489,10 +846,14 @@ async function loadPlaylists() {
             await fetch(
                 url,
                 {
+
                     headers: {
+
                         Authorization:
                             `Bearer ${youtubeAccessToken}`
+
                     }
+
                 }
             );
 
@@ -506,7 +867,7 @@ async function loadPlaylists() {
             console.error(data);
 
             alert(
-                "Couldn't load your YouTube playlists."
+                "Couldn't load your playlists."
             );
 
             return;
@@ -524,13 +885,15 @@ async function loadPlaylists() {
         playlistPanel.style.display =
             "block";
 
+    }
 
-    } catch (error) {
+
+    catch (error) {
 
         console.error(error);
 
         alert(
-            "Something went wrong while loading YouTube."
+            "Something went wrong loading YouTube."
         );
 
     }
@@ -556,27 +919,18 @@ function displayPlaylists() {
         );
 
 
+    list.innerHTML = "";
+
     videoList.innerHTML = "";
 
 
-    if (!youtubePlaylists.length) {
-
-        list.innerHTML =
-            "<p>No playlists found.</p>";
-
-        return;
-
-    }
-
-
-    list.innerHTML = "";
-
-
     youtubePlaylists.forEach(
-        (playlist) => {
+        function (playlist) {
 
             const item =
-                document.createElement("div");
+                document.createElement(
+                    "div"
+                );
 
 
             item.className =
@@ -607,7 +961,7 @@ function displayPlaylists() {
 
             item.addEventListener(
                 "click",
-                () => {
+                function () {
 
                     loadPlaylistVideos(
                         playlist.id,
@@ -627,7 +981,7 @@ function displayPlaylists() {
 
 
 // ============================================================
-// LOAD PLAYLIST VIDEOS
+// LOAD VIDEOS
 // ============================================================
 
 async function loadPlaylistVideos(
@@ -652,10 +1006,14 @@ async function loadPlaylistVideos(
             await fetch(
                 url,
                 {
+
                     headers: {
+
                         Authorization:
                             `Bearer ${youtubeAccessToken}`
+
                     }
+
                 }
             );
 
@@ -691,19 +1049,23 @@ async function loadPlaylistVideos(
         displayVideos();
 
 
-        if (currentVideos.length) {
+        if (
+            currentVideos.length
+        ) {
 
             showCurrentVideo();
 
         }
 
+    }
 
-    } catch (error) {
+
+    catch (error) {
 
         console.error(error);
 
         alert(
-            "Something went wrong loading the playlist."
+            "Couldn't load playlist videos."
         );
 
     }
@@ -733,27 +1095,25 @@ function displayVideos() {
 
 
     currentVideos.forEach(
-        (video, index) => {
+        function (video, index) {
 
             const item =
-                document.createElement("div");
+                document.createElement(
+                    "div"
+                );
 
 
             item.className =
                 "video-item";
 
 
-            const title =
-                video.snippet.title;
-
-
             item.textContent =
-                `${index + 1}. ${title}`;
+                `${index + 1}. ${video.snippet.title}`;
 
 
             item.addEventListener(
                 "click",
-                () => {
+                function () {
 
                     currentVideoIndex =
                         index;
@@ -773,7 +1133,7 @@ function displayVideos() {
 
 
 // ============================================================
-// SHOW CURRENT VIDEO
+// SHOW VIDEO
 // ============================================================
 
 function showCurrentVideo() {
@@ -784,7 +1144,16 @@ function showCurrentVideo() {
         ];
 
 
-    if (!video) return;
+    if (!video)
+        return;
+
+
+    const videoId =
+        video.contentDetails?.videoId;
+
+
+    if (!videoId)
+        return;
 
 
     const title =
@@ -792,7 +1161,8 @@ function showCurrentVideo() {
 
 
     const channel =
-        video.snippet.videoOwnerChannelTitle ||
+        video.snippet
+            .videoOwnerChannelTitle ||
         video.snippet.channelTitle ||
         "YouTube";
 
@@ -821,10 +1191,16 @@ function showCurrentVideo() {
         "▶";
 
 
-    console.log(
-        "Selected video:",
-        video
-    );
+    if (
+        youtubePlayer &&
+        youtubeReady
+    ) {
+
+        youtubePlayer.loadVideoById(
+            videoId
+        );
+
+    }
 
 }
 
@@ -836,10 +1212,14 @@ function showCurrentVideo() {
 function escapeHTML(text) {
 
     const div =
-        document.createElement("div");
+        document.createElement(
+            "div"
+        );
+
 
     div.textContent =
         text;
+
 
     return div.innerHTML;
 
@@ -847,9 +1227,9 @@ function escapeHTML(text) {
 
 
 // ============================================================
-// INITIAL STATE
+// CONSOLE
 // ============================================================
 
 console.log(
-    "My Vinyll loaded successfully."
+    "My Vinyll + YouTube player loaded."
 );

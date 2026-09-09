@@ -1,8 +1,8 @@
 /* ============================================================
    MY VINYLL
-   SPIDER THEME
+   SPIDER-MAN THEME
+   ORIGINAL ELEGANT FONT
    ============================================================ */
-
 
 * {
     box-sizing: border-box;
@@ -10,53 +10,93 @@
     padding: 0;
 }
 
-
 :root {
-
     --black: #05070a;
-
     --blue-black: #07131f;
-
     --blue: #087ea4;
-
     --electric-blue: #13bfe8;
-
     --red: #e21d2f;
-
     --bright-red: #ff3348;
-
     --white: #f5f7fa;
-
     --muted: #91a4b4;
-
 }
 
+/* ============================================================
+   BODY
+   ============================================================ */
 
 body {
-
     min-height: 100vh;
-
-    background:
-        radial-gradient(
-            circle at 50% 40%,
-            #102b3d 0%,
-            #07131f 35%,
-            #030508 75%
-        );
 
     color: var(--white);
 
+    /*
+       ORIGINAL FIRST-DRAFT STYLE FONT
+    */
     font-family:
-        Arial,
-        Helvetica,
-        sans-serif;
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    background:
+        #05070a;
 
     overflow-x: hidden;
+
+    position: relative;
 
     transition:
         background .3s ease,
         color .3s ease;
+}
 
+
+/* ============================================================
+   SPIDER-MAN BACKGROUND
+   ============================================================ */
+
+body::before {
+    content: "";
+
+    position: fixed;
+
+    inset: 0;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(3, 5, 8, .90),
+            rgba(3, 5, 8, .52),
+            rgba(3, 5, 8, .84)
+        ),
+        url("spider-bg.jpg")
+        center center /
+        cover
+        no-repeat;
+
+    z-index: -2;
+
+    pointer-events: none;
+}
+
+
+body::after {
+    content: "";
+
+    position: fixed;
+
+    inset: 0;
+
+    background:
+        radial-gradient(
+            circle at center,
+            transparent 15%,
+            rgba(0,0,0,.58) 100%
+        );
+
+    z-index: -1;
+
+    pointer-events: none;
 }
 
 
@@ -65,7 +105,6 @@ body {
    ============================================================ */
 
 .web {
-
     position: fixed;
 
     pointer-events: none;
@@ -73,12 +112,10 @@ body {
     opacity: .10;
 
     z-index: 0;
-
 }
 
 
 .web-1 {
-
     width: 450px;
     height: 450px;
 
@@ -93,12 +130,10 @@ body {
             transparent 0 35px,
             var(--white) 36px 37px
         );
-
 }
 
 
 .web-2 {
-
     width: 500px;
     height: 500px;
 
@@ -113,7 +148,6 @@ body {
             transparent 0 40px,
             var(--white) 41px 42px
         );
-
 }
 
 
@@ -122,7 +156,6 @@ body {
    ============================================================ */
 
 .top-bar {
-
     position: relative;
 
     z-index: 5;
@@ -140,68 +173,67 @@ body {
 
     border-bottom:
         1px solid
-        rgba(255,255,255,.08);
-
+        rgba(255,255,255,.10);
 }
 
 
 .logo {
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
 
     font-size: 22px;
 
     font-weight: 800;
 
     letter-spacing: 5px;
-
 }
 
 
 .spider {
-
     color: var(--red);
 
     margin-right: 8px;
-
 }
 
 
 nav {
-
     display: flex;
 
     gap: 18px;
 
     align-items: center;
-
 }
 
 
 nav a {
-
     color: var(--muted);
 
     text-decoration: none;
+
+    font-family:
+        "Courier New",
+        monospace;
 
     font-size: 11px;
 
     letter-spacing: 2px;
 
+    transition: .2s ease;
 }
 
 
 nav a:hover {
-
     color: var(--bright-red);
-
 }
 
 
 /* ============================================================
-   CLOCK
+   DIGITAL CLOCK
    ============================================================ */
 
 .clock-card {
-
     position: absolute;
 
     left: 50%;
@@ -221,17 +253,18 @@ nav a:hover {
     border-radius: 12px;
 
     background:
-        rgba(0,0,0,.35);
+        rgba(0,0,0,.45);
 
     box-shadow:
         0 0 20px
         rgba(226,29,47,.08);
 
+    backdrop-filter:
+        blur(8px);
 }
 
 
 #clock {
-
     color:
         var(--bright-red);
 
@@ -244,20 +277,22 @@ nav a:hover {
     font-weight: bold;
 
     letter-spacing: 3px;
-
 }
 
 
 #date {
+    color:
+        var(--muted);
 
-    color: var(--muted);
+    font-family:
+        "Courier New",
+        monospace;
 
     font-size: 8px;
 
     letter-spacing: 2px;
 
     margin-top: 3px;
-
 }
 
 
@@ -266,15 +301,15 @@ nav a:hover {
    ============================================================ */
 
 main {
-
     position: relative;
 
     z-index: 2;
 
-    width: min(
-        1250px,
-        94%
-    );
+    width:
+        min(
+            1250px,
+            94%
+        );
 
     margin:
         60px auto;
@@ -287,7 +322,6 @@ main {
     gap: 70px;
 
     align-items: center;
-
 }
 
 
@@ -296,16 +330,19 @@ main {
    ============================================================ */
 
 .player-section {
-
     padding: 30px;
 
+    min-width: 0;
 }
 
 
 .now-playing {
-
     color:
         var(--bright-red);
+
+    font-family:
+        "Courier New",
+        monospace;
 
     font-size: 10px;
 
@@ -314,34 +351,47 @@ main {
     letter-spacing: 3px;
 
     margin-bottom: 12px;
-
 }
 
 
 .song-info h1 {
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
 
-    font-size: clamp(
-        28px,
-        4vw,
-        48px
-    );
+    font-size:
+        clamp(
+            28px,
+            4vw,
+            48px
+        );
+
+    font-weight: 400;
 
     line-height: 1.05;
 
     max-width: 650px;
 
+    text-shadow:
+        0 3px 25px
+        rgba(0,0,0,.65);
 }
 
 
 .song-info p {
-
     margin-top: 10px;
 
     color:
         var(--muted);
 
-    font-size: 14px;
+    font-family:
+        "Courier New",
+        monospace;
 
+    font-size: 12px;
+
+    letter-spacing: 2px;
 }
 
 
@@ -350,7 +400,6 @@ main {
    ============================================================ */
 
 .timeline-area {
-
     display: grid;
 
     grid-template-columns:
@@ -361,12 +410,10 @@ main {
     gap: 12px;
 
     margin-top: 35px;
-
 }
 
 
 .timeline-area span {
-
     font-family:
         "Courier New",
         monospace;
@@ -375,12 +422,10 @@ main {
 
     color:
         var(--muted);
-
 }
 
 
 #timeline {
-
     width: 100%;
 
     height: 5px;
@@ -399,12 +444,10 @@ main {
     border-radius: 10px;
 
     cursor: pointer;
-
 }
 
 
 #timeline::-webkit-slider-thumb {
-
     appearance: none;
 
     width: 15px;
@@ -422,12 +465,10 @@ main {
     box-shadow:
         0 0 12px
         rgba(255,51,72,.7);
-
 }
 
 
 #timeline::-moz-range-thumb {
-
     width: 15px;
     height: 15px;
 
@@ -439,7 +480,6 @@ main {
     border:
         2px solid
         white;
-
 }
 
 
@@ -448,7 +488,6 @@ main {
    ============================================================ */
 
 .controls {
-
     display: flex;
 
     align-items: center;
@@ -456,16 +495,16 @@ main {
     gap: 22px;
 
     margin-top: 28px;
-
 }
 
 
 .controls button {
-
     width: 40px;
     height: 40px;
 
-    border: none;
+    border:
+        1px solid
+        rgba(255,255,255,.08);
 
     border-radius: 50%;
 
@@ -473,19 +512,24 @@ main {
         var(--white);
 
     background:
-        rgba(255,255,255,.06);
+        rgba(0,0,0,.35);
 
     cursor: pointer;
 
+    font-family:
+        "Courier New",
+        monospace;
+
     transition:
         .2s ease;
-
 }
 
 
 .controls button:hover {
-
     background:
+        var(--red);
+
+    border-color:
         var(--red);
 
     box-shadow:
@@ -494,12 +538,10 @@ main {
 
     transform:
         translateY(-2px);
-
 }
 
 
 .controls .play-button {
-
     width: 62px;
     height: 62px;
 
@@ -511,15 +553,12 @@ main {
     box-shadow:
         0 0 25px
         rgba(226,29,47,.35);
-
 }
 
 
 .controls .play-button:hover {
-
     background:
         var(--bright-red);
-
 }
 
 
@@ -528,7 +567,6 @@ main {
    ============================================================ */
 
 .search-box {
-
     margin-top: 35px;
 
     display: flex;
@@ -541,27 +579,42 @@ main {
         1px solid
         rgba(19,191,232,.35);
 
-    border-radius: 14px;
+    border-radius: 30px;
 
     background:
-        rgba(0,0,0,.3);
+        rgba(0,0,0,.42);
 
     box-shadow:
         0 0 25px
-        rgba(19,191,232,.05);
+        rgba(19,191,232,.08);
 
+    backdrop-filter:
+        blur(10px);
+
+    transition:
+        border-color .2s ease,
+        box-shadow .2s ease;
+}
+
+
+.search-box:focus-within {
+    border-color:
+        rgba(19,191,232,.75);
+
+    box-shadow:
+        0 0 25px
+        rgba(19,191,232,.15);
 }
 
 
 .search-icon {
-
     margin-left: 13px;
 
+    font-size: 16px;
 }
 
 
 #search {
-
     flex: 1;
 
     min-width: 0;
@@ -573,28 +626,31 @@ main {
 
     outline: none;
 
-    background: transparent;
+    background:
+        transparent;
 
-    color: white;
+    color:
+        white;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
 
     font-size: 14px;
-
 }
 
 
 #search::placeholder {
-
     color:
-        #657987;
-
+        #7c8b95;
 }
 
 
 #search-button {
-
     border: none;
 
-    border-radius: 10px;
+    border-radius: 22px;
 
     padding:
         12px 18px;
@@ -604,6 +660,10 @@ main {
 
     color: white;
 
+    font-family:
+        "Courier New",
+        monospace;
+
     font-weight: bold;
 
     font-size: 10px;
@@ -612,14 +672,25 @@ main {
 
     cursor: pointer;
 
+    transition: .2s ease;
 }
 
 
 #search-button:hover {
-
     background:
         var(--bright-red);
 
+    box-shadow:
+        0 0 15px
+        rgba(255,51,72,.35);
+}
+
+
+#search-button:disabled {
+    opacity: .6;
+
+    cursor:
+        wait;
 }
 
 
@@ -628,7 +699,6 @@ main {
    ============================================================ */
 
 .search-results {
-
     display: none;
 
     margin-top: 15px;
@@ -639,11 +709,15 @@ main {
 
     border-radius: 12px;
 
+    scrollbar-width: thin;
+
+    scrollbar-color:
+        var(--red)
+        transparent;
 }
 
 
 .search-result {
-
     display: flex;
 
     gap: 14px;
@@ -652,31 +726,44 @@ main {
 
     margin-bottom: 7px;
 
+    border:
+        1px solid
+        rgba(255,255,255,.05);
+
     border-radius: 10px;
 
     background:
-        rgba(255,255,255,.045);
+        rgba(0,0,0,.45);
+
+    backdrop-filter:
+        blur(8px);
 
     cursor: pointer;
 
-    transition: .2s;
-
+    transition:
+        .2s ease;
 }
 
 
 .search-result:hover {
-
     background:
         rgba(226,29,47,.15);
 
+    border-color:
+        rgba(226,29,47,.35);
+
     transform:
         translateX(3px);
+}
 
+
+.search-result:active {
+    transform:
+        scale(.99);
 }
 
 
 .search-result img {
-
     width: 100px;
 
     height: 56px;
@@ -685,19 +772,24 @@ main {
 
     border-radius: 7px;
 
+    flex-shrink: 0;
 }
 
 
 .result-text {
-
     min-width: 0;
 
+    align-self: center;
 }
 
 
 .result-title {
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
 
-    font-size: 13px;
+    font-size: 14px;
 
     font-weight: bold;
 
@@ -706,19 +798,22 @@ main {
     overflow: hidden;
 
     text-overflow: ellipsis;
-
 }
 
 
 .result-channel {
-
     color:
         var(--muted);
 
-    font-size: 11px;
+    font-family:
+        "Courier New",
+        monospace;
+
+    font-size: 9px;
 
     margin-top: 5px;
 
+    letter-spacing: 1px;
 }
 
 
@@ -727,7 +822,6 @@ main {
    ============================================================ */
 
 .turntable {
-
     position: relative;
 
     display: flex;
@@ -736,18 +830,25 @@ main {
 
     align-items: center;
 
+    min-width: 0;
 }
 
 
 .record {
-
     width:
-        min(420px, 38vw);
+        min(
+            420px,
+            38vw
+        );
 
     height:
-        min(420px, 38vw);
+        min(
+            420px,
+            38vw
+        );
 
     min-width: 280px;
+
     min-height: 280px;
 
     border-radius: 50%;
@@ -768,14 +869,13 @@ main {
     box-shadow:
         0 30px 80px
         rgba(0,0,0,.7),
+
         inset 0 0 50px
         rgba(0,0,0,.8);
-
 }
 
 
 .record::after {
-
     content: "";
 
     position: absolute;
@@ -787,12 +887,10 @@ main {
     border:
         1px solid
         rgba(255,255,255,.07);
-
 }
 
 
 .record-label {
-
     position: absolute;
 
     width: 105px;
@@ -825,23 +923,23 @@ main {
     box-shadow:
         0 0 25px
         rgba(226,29,47,.3);
-
 }
 
 
 .record-label span {
+    font-family:
+        "Courier New",
+        monospace;
 
     font-size: 11px;
 
     font-weight: 900;
 
     letter-spacing: 2px;
-
 }
 
 
 .record-hole {
-
     position: absolute;
 
     width: 12px;
@@ -859,26 +957,25 @@ main {
         #05070a;
 
     z-index: 3;
-
 }
 
 
 .spinning {
-
     animation:
         spin 3s linear infinite;
-
 }
 
 
 @keyframes spin {
 
     from {
-        transform: rotate(0deg);
+        transform:
+            rotate(0deg);
     }
 
     to {
-        transform: rotate(360deg);
+        transform:
+            rotate(360deg);
     }
 
 }
@@ -889,7 +986,6 @@ main {
    ============================================================ */
 
 .tonearm {
-
     position: absolute;
 
     width: 170px;
@@ -902,12 +998,10 @@ main {
 
     transform:
         rotate(12deg);
-
 }
 
 
 .tonearm-base {
-
     position: absolute;
 
     width: 65px;
@@ -924,12 +1018,10 @@ main {
     border:
         2px solid
         #303b43;
-
 }
 
 
 .arm {
-
     position: absolute;
 
     width: 135px;
@@ -948,12 +1040,10 @@ main {
 
     transform-origin:
         right center;
-
 }
 
 
 .cartridge {
-
     position: absolute;
 
     left: -12px;
@@ -964,7 +1054,6 @@ main {
 
     background:
         var(--red);
-
 }
 
 
@@ -973,53 +1062,55 @@ main {
    ============================================================ */
 
 .youtube-section {
-
     position: relative;
 
     z-index: 3;
 
     width:
-        min(650px, 90%);
+        min(
+            650px,
+            90%
+        );
 
     margin:
         0 auto 40px;
-
 }
 
 
 .youtube-title {
-
     color:
         var(--muted);
+
+    font-family:
+        "Courier New",
+        monospace;
 
     font-size: 9px;
 
     letter-spacing: 3px;
 
     margin-bottom: 10px;
-
 }
 
 
 #youtube-player {
-
     width: 100%;
 
-    aspect-ratio: 16 / 9;
-
+    aspect-ratio:
+        16 / 9;
 }
 
 
 #youtube-player iframe {
+    width:
+        100% !important;
 
-    width: 100% !important;
-
-    height: 100% !important;
+    height:
+        100% !important;
 
     border: none;
 
     border-radius: 14px;
-
 }
 
 
@@ -1028,7 +1119,6 @@ main {
    ============================================================ */
 
 footer {
-
     position: relative;
 
     z-index: 5;
@@ -1041,21 +1131,24 @@ footer {
 
     padding:
         20px 30px 35px;
-
 }
 
 
 .theme-button,
 .login-button {
-
     border:
         1px solid
         rgba(255,255,255,.12);
 
     background:
-        rgba(255,255,255,.05);
+        rgba(0,0,0,.40);
 
-    color: white;
+    color:
+        white;
+
+    font-family:
+        "Courier New",
+        monospace;
 
     padding:
         11px 17px;
@@ -1064,14 +1157,28 @@ footer {
 
     cursor: pointer;
 
+    backdrop-filter:
+        blur(8px);
+
+    transition: .2s ease;
 }
 
 
+.theme-button:hover,
 .login-button:hover {
-
     background:
         var(--red);
 
+    border-color:
+        var(--red);
+}
+
+
+.login-button:disabled {
+    opacity: .75;
+
+    cursor:
+        default;
 }
 
 
@@ -1082,119 +1189,110 @@ footer {
 @media (max-width: 900px) {
 
     .top-bar {
-
         padding:
             20px;
-
     }
 
 
     nav {
-
         display: none;
-
     }
 
 
     .clock-card {
-
         position: static;
 
         transform: none;
-
     }
 
 
     main {
-
         grid-template-columns:
             1fr;
 
         gap: 20px;
 
         margin-top: 30px;
-
     }
 
 
     .player-section {
-
         order: 2;
-
     }
 
 
     .turntable {
-
         order: 1;
-
     }
 
 
     .record {
-
         width: 300px;
-        height: 300px;
 
+        height: 300px;
     }
 
 
     .tonearm {
-
         display: none;
-
     }
 
 }
 
 
+/* ============================================================
+   SMALL MOBILE
+   ============================================================ */
+
 @media (max-width: 550px) {
 
     .logo {
-
         font-size: 16px;
 
         letter-spacing: 2px;
-
     }
 
 
     .clock-card {
-
         padding:
             6px 10px;
-
     }
 
 
     #clock {
-
         font-size: 13px;
-
     }
 
 
     .search-box {
-
         flex-wrap: wrap;
 
+        border-radius: 14px;
+    }
+
+
+    #search {
+        min-width: 150px;
     }
 
 
     #search-button {
-
         width: 100%;
 
         margin-top: 3px;
 
+        border-radius: 10px;
     }
 
 
     .timeline-area {
-
         grid-template-columns:
             40px 1fr 40px;
+    }
 
+
+    .controls {
+        gap: 12px;
     }
 
 }

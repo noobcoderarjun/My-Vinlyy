@@ -1,6 +1,6 @@
 // ============================================================
 // MY VINYLL
-// SPIDER THEME + YOUTUBE SEARCH + TIMELINE + CLOCK
+// SPIDER THEME + YOUTUBE SEARCH + TIMELINE + NEW DELHI CLOCK
 // ============================================================
 
 
@@ -104,72 +104,55 @@ let isSeeking = false;
 
 
 // ============================================================
-// DIGITAL CLOCK
+// DIGITAL CLOCK — NEW DELHI / IST
 // ============================================================
 
 function updateClock() {
 
-    const now =
-        new Date();
+    const now = new Date();
 
+    const timeFormatter =
+        new Intl.DateTimeFormat(
+            "en-IN",
+            {
+                timeZone: "Asia/Kolkata",
+                hour: "2-digit",
+                minute: "2-digit",
+                second: "2-digit",
+                hour12: false
+            }
+        );
 
-    const hours =
-        String(
-            now.getHours()
-        ).padStart(2, "0");
-
-
-    const minutes =
-        String(
-            now.getMinutes()
-        ).padStart(2, "0");
-
-
-    const seconds =
-        String(
-            now.getSeconds()
-        ).padStart(2, "0");
+    const dateFormatter =
+        new Intl.DateTimeFormat(
+            "en-IN",
+            {
+                timeZone: "Asia/Kolkata",
+                weekday: "short",
+                month: "short",
+                day: "2-digit"
+            }
+        );
 
 
     clock.textContent =
-        `${hours}:${minutes}:${seconds}`;
-
-
-    const days = [
-        "SUN",
-        "MON",
-        "TUE",
-        "WED",
-        "THU",
-        "FRI",
-        "SAT"
-    ];
-
-
-    const months = [
-        "JAN",
-        "FEB",
-        "MAR",
-        "APR",
-        "MAY",
-        "JUN",
-        "JUL",
-        "AUG",
-        "SEP",
-        "OCT",
-        "NOV",
-        "DEC"
-    ];
+        timeFormatter.format(now);
 
 
     date.textContent =
-        `${days[now.getDay()]} • ${months[now.getMonth()]} ${String(now.getDate()).padStart(2, "0")}`;
+        dateFormatter
+            .format(now)
+            .toUpperCase()
+            .replace(",", " •");
 
 }
 
 
+// Update immediately
 updateClock();
 
+
+// Update every second
 setInterval(
     updateClock,
     1000
@@ -207,8 +190,7 @@ window.onYouTubeIframeAPIReady =
                         onReady:
                             function () {
 
-                                playerReady =
-                                    true;
+                                playerReady = true;
 
                                 console.log(
                                     "YouTube player ready."
@@ -216,10 +198,8 @@ window.onYouTubeIframeAPIReady =
 
                             },
 
-
                         onStateChange:
                             handlePlayerState,
-
 
                         onError:
                             function (event) {
@@ -247,12 +227,11 @@ window.onYouTubeIframeAPIReady =
 // PLAYER STATE
 // ============================================================
 
-function handlePlayerState(
-    event
-) {
+function handlePlayerState(event) {
 
-    if (!window.YT)
+    if (!window.YT) {
         return;
+    }
 
 
     if (
@@ -350,7 +329,9 @@ playButton.addEventListener(
 
             player.pauseVideo();
 
-        } else {
+        }
+
+        else {
 
             player.playVideo();
 
@@ -368,8 +349,9 @@ restartButton.addEventListener(
     "click",
     function () {
 
-        if (!playerReady)
+        if (!playerReady) {
             return;
+        }
 
 
         player.seekTo(
@@ -395,8 +377,9 @@ nextButton.addEventListener(
 
 function nextSong() {
 
-    if (!currentVideos.length)
+    if (!currentVideos.length) {
         return;
+    }
 
 
     currentVideoIndex++;
@@ -425,8 +408,9 @@ previousButton.addEventListener(
     "click",
     function () {
 
-        if (!currentVideos.length)
+        if (!currentVideos.length) {
             return;
+        }
 
 
         currentVideoIndex--;
@@ -456,8 +440,9 @@ shuffleButton.addEventListener(
     "click",
     function () {
 
-        if (!currentVideos.length)
+        if (!currentVideos.length) {
             return;
+        }
 
 
         currentVideoIndex =
@@ -485,8 +470,9 @@ function playCurrentVideo() {
         ];
 
 
-    if (!video)
+    if (!video) {
         return;
+    }
 
 
     const videoId =
@@ -494,8 +480,9 @@ function playCurrentVideo() {
         video.contentDetails?.videoId;
 
 
-    if (!videoId)
+    if (!videoId) {
         return;
+    }
 
 
     songTitle.textContent =
@@ -516,9 +503,13 @@ function playCurrentVideo() {
         "00:00";
 
 
-    if (
-        playerReady
-    ) {
+    updateTimelineVisual(
+        0,
+        100
+    );
+
+
+    if (playerReady) {
 
         player.loadVideoById(
             videoId
@@ -530,7 +521,7 @@ function playCurrentVideo() {
 
 
 // ============================================================
-// SEARCH
+// SEARCH YOUTUBE
 // ============================================================
 
 async function searchYouTube() {
@@ -559,7 +550,6 @@ async function searchYouTube() {
 
     searchButton.textContent =
         "SEARCHING...";
-
 
     searchButton.disabled =
         true;
@@ -590,14 +580,10 @@ async function searchYouTube() {
             await fetch(
                 url,
                 {
-
                     headers: {
-
                         Authorization:
                             `Bearer ${accessToken}`
-
                     }
-
                 }
             );
 
@@ -611,7 +597,7 @@ async function searchYouTube() {
             console.error(data);
 
             searchResults.innerHTML =
-                "<p>Search failed. Check the browser console.</p>";
+                "<p>Search failed. Please try again.</p>";
 
             return;
 
@@ -675,6 +661,8 @@ searchInput.addEventListener(
             "Enter"
         ) {
 
+            event.preventDefault();
+
             searchYouTube();
 
         }
@@ -687,9 +675,7 @@ searchInput.addEventListener(
 // DISPLAY SEARCH RESULTS
 // ============================================================
 
-function displaySearchResults(
-    results
-) {
+function displaySearchResults(results) {
 
     searchResults.innerHTML =
         "";
@@ -718,10 +704,22 @@ function displaySearchResults(
                 "search-result";
 
 
+            const thumbnail =
+                video.snippet
+                    ?.thumbnails
+                    ?.medium
+                    ?.url ||
+                video.snippet
+                    ?.thumbnails
+                    ?.default
+                    ?.url ||
+                "";
+
+
             item.innerHTML = `
 
                 <img
-                    src="${video.snippet.thumbnails.medium.url}"
+                    src="${thumbnail}"
                     alt=""
                 >
 
@@ -779,7 +777,7 @@ function displaySearchResults(
 
 
 // ============================================================
-// TIMELINE UPDATE
+// TIMELINE
 // ============================================================
 
 function startTimeline() {
@@ -804,8 +802,7 @@ function stopTimeline() {
             timeTimer
         );
 
-        timeTimer =
-            null;
+        timeTimer = null;
 
     }
 
@@ -832,8 +829,9 @@ function updateTimeline() {
         player.getDuration();
 
 
-    if (!total)
+    if (!total) {
         return;
+    }
 
 
     timeline.max =
@@ -900,6 +898,11 @@ timeline.addEventListener(
     "change",
     function () {
 
+        if (!playerReady) {
+            return;
+        }
+
+
         const value =
             Number(
                 timeline.value
@@ -927,8 +930,9 @@ function updateTimelineVisual(
     total
 ) {
 
-    if (!total)
+    if (!total) {
         return;
+    }
 
 
     const percentage =
@@ -957,9 +961,7 @@ function updateTimelineVisual(
 // FORMAT TIME
 // ============================================================
 
-function formatTime(
-    seconds
-) {
+function formatTime(seconds) {
 
     if (
         !Number.isFinite(
@@ -1083,7 +1085,7 @@ youtubeButton.addEventListener(
 
 
 // ============================================================
-// DARK MODE
+// THEME BUTTON
 // ============================================================
 
 themeButton.addEventListener(
@@ -1110,9 +1112,7 @@ themeButton.addEventListener(
 // ESCAPE HTML
 // ============================================================
 
-function escapeHTML(
-    text
-) {
+function escapeHTML(text) {
 
     const div =
         document.createElement(
@@ -1129,6 +1129,14 @@ function escapeHTML(
 }
 
 
+// ============================================================
+// READY
+// ============================================================
+
 console.log(
     "🕷️ MY VINYLL READY"
+);
+
+console.log(
+    "🇮🇳 Clock timezone: Asia/Kolkata"
 );

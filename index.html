@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>My Vinyll 🕷️🏹</title>
+    <title>My Vinyll 🕷️</title>
 
     <script src="https://accounts.google.com/gsi/client" async defer></script>
     <script src="https://www.youtube.com/iframe_api"></script>
@@ -13,15 +13,16 @@
     <link rel="stylesheet" href="style.css">
 </head>
 
-
 <body>
 
-    <!-- SPIDER WEB DECORATION -->
+    <!-- DARK MODE TRANSITION -->
+    <div id="theme-transition"></div>
+
+    <!-- SPIDER WEBS -->
     <div class="web web-1"></div>
     <div class="web web-2"></div>
 
-
-    <!-- HEADER -->
+    <!-- ================= HEADER ================= -->
 
     <header class="top-bar">
 
@@ -40,25 +41,19 @@
 
 
         <nav>
-
             <a href="#">ABOUT</a>
-
             <span>•</span>
-
             <a href="#">VINYLL</a>
-
         </nav>
 
     </header>
 
 
-
-    <!-- MAIN -->
+    <!-- ================= MAIN FRAME ================= -->
 
     <main>
 
-
-        <!-- PLAYER -->
+        <!-- ================= MUSIC PLAYER ================= -->
 
         <section class="player-section">
 
@@ -77,7 +72,6 @@
                 </p>
 
             </div>
-
 
 
             <!-- TIMELINE -->
@@ -103,36 +97,35 @@
             </div>
 
 
-
             <!-- CONTROLS -->
 
             <div class="controls">
 
-                <button id="restart">
+                <button id="restart" title="Restart">
                     ↶
                 </button>
 
-                <button id="previous">
+                <button id="previous" title="Previous">
                     |◀
                 </button>
 
                 <button
                     id="play"
                     class="play-button"
+                    title="Play / Pause"
                 >
                     ▶
                 </button>
 
-                <button id="next">
+                <button id="next" title="Next">
                     ▶|
                 </button>
 
-                <button id="shuffle">
+                <button id="shuffle" title="Shuffle">
                     ⤨
                 </button>
 
             </div>
-
 
 
             <!-- SEARCH -->
@@ -157,7 +150,6 @@
             </div>
 
 
-
             <!-- SEARCH RESULTS -->
 
             <div
@@ -168,31 +160,14 @@
         </section>
 
 
-
-        <!-- VINYL + BOW -->
+        <!-- ================= VINYL ================= -->
 
         <section class="turntable">
-
-            <!-- BOW AND ARROW -->
-
-            <div class="bow-decoration">
-
-                <img
-                    src="bow.png"
-                    alt="Bow and arrow"
-                >
-
-            </div>
-
-
-            <!-- VINYL -->
 
             <div
                 class="record"
                 id="record"
             >
-
-                <div class="record-lines"></div>
 
                 <div class="record-label">
 
@@ -208,16 +183,97 @@
             </div>
 
 
-            <!-- TONEARM -->
+            <!-- TONE ARM -->
 
             <div class="tonearm">
 
                 <div class="tonearm-base"></div>
 
                 <div class="arm">
-
                     <div class="cartridge"></div>
+                </div>
 
+            </div>
+
+
+            <!-- BOW + ARROW -->
+
+            <div class="arjun-bow">
+
+                <svg
+                    viewBox="0 0 500 260"
+                    xmlns="http://www.w3.org/2000/svg"
+                >
+
+                    <!-- BOW -->
+
+                    <path
+                        class="bow-line"
+                        d="M55 55
+                           Q125 145 250 170
+                           Q375 145 445 55"
+                    />
+
+                    <path
+                        class="bow-line"
+                        d="M55 55
+                           Q110 95 145 100"
+                    />
+
+                    <path
+                        class="bow-line"
+                        d="M445 55
+                           Q390 95 355 100"
+                    />
+
+
+                    <!-- BOW STRING -->
+
+                    <line
+                        class="bow-string"
+                        x1="55"
+                        y1="55"
+                        x2="445"
+                        y2="55"
+                    />
+
+
+                    <!-- ARROW -->
+
+                    <line
+                        class="arrow-line"
+                        x1="110"
+                        y1="55"
+                        x2="390"
+                        y2="55"
+                    />
+
+
+                    <!-- ARROW HEAD -->
+
+                    <path
+                        class="arrow-head"
+                        d="M390 55
+                           L365 43
+                           M390 55
+                           L365 67"
+                    />
+
+
+                    <!-- FEATHERS -->
+
+                    <path
+                        class="arrow-feather"
+                        d="M125 55
+                           L105 40
+                           M125 55
+                           L105 70"
+                    />
+
+                </svg>
+
+                <div class="arjun-text">
+                    ARJUNN
                 </div>
 
             </div>
@@ -227,28 +283,23 @@
     </main>
 
 
-
-    <!-- YOUTUBE PLAYER -->
+    <!-- ================= HIDDEN YOUTUBE PLAYER ================= -->
 
     <section class="youtube-section">
-
-        <div class="youtube-title">
-            YOUTUBE PLAYER
-        </div>
 
         <div id="youtube-player"></div>
 
     </section>
 
 
-
-    <!-- FOOTER -->
+    <!-- ================= FOOTER ================= -->
 
     <footer>
 
         <button
             id="theme-toggle"
             class="theme-button"
+            title="Change theme"
         >
             ◐
         </button>

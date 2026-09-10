@@ -1,6 +1,7 @@
 // ============================================================
 // MY VINYLL
-// SPIDER THEME + YOUTUBE SEARCH + TIMELINE + DARK MODE
+// SPIDER × ARJUNN
+// YOUTUBE SEARCH + PLAYER + TIMELINE + THEME
 // ============================================================
 
 
@@ -9,11 +10,11 @@
 // ============================================================
 
 const CLIENT_ID =
-    "795809069739-s7lm14e62q020dt31pup29vnk3p7l5k6.apps.googleusercontent.com";
+    "YOUR_ACTUAL_CLIENT_ID.apps.googleusercontent.com";
 
 
 // ============================================================
-// YOUTUBE API
+// YOUTUBE
 // ============================================================
 
 const YOUTUBE_API =
@@ -75,6 +76,9 @@ const youtubeButton =
 const themeButton =
     document.getElementById("theme-toggle");
 
+const themeTransition =
+    document.getElementById("theme-transition");
+
 
 // ============================================================
 // STATE
@@ -103,56 +107,58 @@ let isSeeking = false;
 
 window.onYouTubeIframeAPIReady = function () {
 
-    player = new YT.Player(
-        "youtube-player",
-        {
+    player =
+        new YT.Player(
+            "youtube-player",
+            {
 
-            width: "650",
+                width: "1",
+                height: "1",
 
-            height: "365",
+                playerVars: {
 
-            playerVars: {
+                    playsinline: 1,
 
-                playsinline: 1,
+                    controls: 0,
 
-                controls: 1,
+                    rel: 0,
 
-                rel: 0
-
-            },
-
-            events: {
-
-                onReady: function () {
-
-                    playerReady = true;
-
-                    console.log(
-                        "YouTube player ready."
-                    );
+                    modestbranding: 1
 
                 },
 
-                onStateChange:
-                    handlePlayerState,
+                events: {
 
-                onError: function (event) {
+                    onReady: function () {
 
-                    console.error(
-                        "YouTube error:",
-                        event.data
-                    );
+                        playerReady = true;
 
-                    alert(
-                        "This YouTube video cannot be played here. Try another one."
-                    );
+                        console.log(
+                            "YouTube player ready."
+                        );
+
+                    },
+
+                    onStateChange:
+                        handlePlayerState,
+
+                    onError: function (event) {
+
+                        console.error(
+                            "YouTube error:",
+                            event.data
+                        );
+
+                        alert(
+                            "This YouTube video cannot be played here. Try another one."
+                        );
+
+                    }
 
                 }
 
             }
-
-        }
-    );
+        );
 
 };
 
@@ -262,9 +268,7 @@ playButton.addEventListener(
 
             player.pauseVideo();
 
-        }
-
-        else {
+        } else {
 
             player.playVideo();
 
@@ -413,7 +417,9 @@ function playCurrentVideo() {
 
 
     songTitle.textContent =
-        video.snippet.title;
+        cleanTitle(
+            video.snippet.title
+        );
 
 
     artist.textContent =
@@ -459,11 +465,8 @@ async function searchYouTube() {
         searchInput.value.trim();
 
 
-    if (!query) {
-
+    if (!query)
         return;
-
-    }
 
 
     if (!accessToken) {
@@ -489,7 +492,7 @@ async function searchYouTube() {
 
 
     searchResults.innerHTML =
-        "<p>Searching YouTube...</p>";
+        "<p style='padding:15px'>Searching YouTube...</p>";
 
 
     try {
@@ -530,7 +533,7 @@ async function searchYouTube() {
             console.error(data);
 
             searchResults.innerHTML =
-                "<p>Search failed. Check the browser console.</p>";
+                "<p style='padding:15px'>Search failed.</p>";
 
             return;
 
@@ -553,7 +556,7 @@ async function searchYouTube() {
         console.error(error);
 
         searchResults.innerHTML =
-            "<p>Something went wrong.</p>";
+            "<p style='padding:15px'>Something went wrong.</p>";
 
     }
 
@@ -582,7 +585,7 @@ searchButton.addEventListener(
 
 
 // ============================================================
-// ENTER TO SEARCH
+// ENTER SEARCH
 // ============================================================
 
 searchInput.addEventListener(
@@ -615,7 +618,7 @@ function displaySearchResults(results) {
     if (!results.length) {
 
         searchResults.innerHTML =
-            "<p>No videos found.</p>";
+            "<p style='padding:15px'>No videos found.</p>";
 
         return;
 
@@ -636,8 +639,10 @@ function displaySearchResults(results) {
 
 
             const thumbnail =
-                video.snippet.thumbnails?.medium?.url ||
-                video.snippet.thumbnails?.default?.url ||
+                video.snippet
+                    ?.thumbnails
+                    ?.medium
+                    ?.url ||
                 "";
 
 
@@ -652,7 +657,9 @@ function displaySearchResults(results) {
 
                     <div class="result-title">
                         ${escapeHTML(
-                            video.snippet.title
+                            cleanTitle(
+                                video.snippet.title
+                            )
                         )}
                     </div>
 
@@ -727,8 +734,7 @@ function stopTimeline() {
             timeTimer
         );
 
-        timeTimer =
-            null;
+        timeTimer = null;
 
     }
 
@@ -823,13 +829,8 @@ timeline.addEventListener(
     "change",
     function () {
 
-        if (!playerReady) {
-
-            isSeeking = false;
-
+        if (!playerReady)
             return;
-
-        }
 
 
         const value =
@@ -873,32 +874,26 @@ function updateTimelineVisual(
         );
 
 
+    const dark =
+        document.body.classList.contains(
+            "dark"
+        );
+
+
+    const emptyColor =
+        dark
+            ? "#26313a"
+            : "#d5d5d5";
+
+
     timeline.style.background =
         `linear-gradient(
             to right,
-            #ff3348 0%,
-            #ff3348 ${percentage}%,
-            #d5d5d5 ${percentage}%,
-            #d5d5d5 100%
+            #ed1b2f 0%,
+            #ed1b2f ${percentage}%,
+            ${emptyColor} ${percentage}%,
+            ${emptyColor} 100%
         )`;
-
-
-    if (
-        document.body.classList.contains(
-            "dark"
-        )
-    ) {
-
-        timeline.style.background =
-            `linear-gradient(
-                to right,
-                #ff3348 0%,
-                #ff3348 ${percentage}%,
-                #24313a ${percentage}%,
-                #24313a 100%
-            )`;
-
-    }
 
 }
 
@@ -981,7 +976,7 @@ youtubeButton.addEventListener(
                         YOUTUBE_SCOPE,
 
                     callback:
-                        async function (
+                        function (
                             response
                         ) {
 
@@ -1030,52 +1025,127 @@ youtubeButton.addEventListener(
 
 
 // ============================================================
-// DARK / LIGHT MODE
+// THEME TOGGLE
 // ============================================================
 
 themeButton.addEventListener(
     "click",
-    function () {
+    function (event) {
 
-        document.body.classList.toggle(
-            "dark"
-        );
+        const rect =
+            themeButton.getBoundingClientRect();
 
 
-        const darkMode =
-            document.body.classList.contains(
+        const x =
+            rect.left +
+            rect.width / 2;
+
+
+        const y =
+            rect.top +
+            rect.height / 2;
+
+
+        const newDarkMode =
+            !document.body.classList.contains(
                 "dark"
             );
 
 
-        themeButton.textContent =
-            darkMode
-                ? "☀"
-                : "◐";
+        themeTransition.style.setProperty(
+            "--wipe-x",
+            `${x}px`
+        );
 
 
-        // Update timeline immediately
-        if (playerReady) {
+        themeTransition.style.setProperty(
+            "--wipe-y",
+            `${y}px`
+        );
 
-            const current =
-                player.getCurrentTime();
 
-            const total =
-                player.getDuration();
+        themeTransition.style.setProperty(
+            "--transition-color",
+            newDarkMode
+                ? "#05070a"
+                : "#f7f5ef"
+        );
 
-            if (total) {
 
-                updateTimelineVisual(
-                    current,
-                    total
+        themeTransition.classList.remove(
+            "animate"
+        );
+
+
+        void themeTransition.offsetWidth;
+
+
+        themeTransition.classList.add(
+            "animate"
+        );
+
+
+        setTimeout(
+            function () {
+
+                document.body.classList.toggle(
+                    "dark"
                 );
 
-            }
 
-        }
+                themeButton.textContent =
+                    newDarkMode
+                        ? "☀"
+                        : "◐";
+
+
+                updateTimelineVisual(
+                    Number(
+                        timeline.value
+                    ),
+                    Number(
+                        timeline.max
+                    )
+                );
+
+            },
+            180
+        );
+
+
+        setTimeout(
+            function () {
+
+                themeTransition.classList.remove(
+                    "animate"
+                );
+
+            },
+            800
+        );
 
     }
 );
+
+
+// ============================================================
+// CLEAN YOUTUBE TITLE
+// ============================================================
+
+function cleanTitle(title) {
+
+    if (!title)
+        return "Choose a song";
+
+
+    return title
+        .replace(/&#39;/g, "'")
+        .replace(/&quot;/g, '"')
+        .replace(/&amp;/g, "&")
+        .replace(/&lt;/g, "<")
+        .replace(/&gt;/g, ">");
+
+}
 
 
 // ============================================================
@@ -1100,9 +1170,32 @@ function escapeHTML(text) {
 
 
 // ============================================================
+// CLOSE SEARCH WHEN CLICKING OUTSIDE
+// ============================================================
+
+document.addEventListener(
+    "click",
+    function (event) {
+
+        if (
+            !searchResults.contains(event.target) &&
+            !searchInput.contains(event.target) &&
+            !searchButton.contains(event.target)
+        ) {
+
+            searchResults.style.display =
+                "none";
+
+        }
+
+    }
+);
+
+
+// ============================================================
 // READY
 // ============================================================
 
 console.log(
-    "🕷️🏹 MY VINYLL READY"
+    "🕷️ MY VINYLL × ARJUNN READY"
 );
